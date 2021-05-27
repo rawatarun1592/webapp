@@ -9,11 +9,16 @@ import org.springframework.web.servlet.ModelAndView;
 @EnableAutoConfiguration
 public class HelloWorld {
     @RequestMapping("/")
-    public ModelAndView home()
-    {
+    public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-       
-return modelAndView;
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/submit")
+    public String submit() {
+
+        return "submitmessage";
     }
 }
