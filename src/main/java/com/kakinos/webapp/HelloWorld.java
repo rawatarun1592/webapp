@@ -15,10 +15,18 @@ public class HelloWorld {
 
         return modelAndView;
     }
-
     @RequestMapping("/submit")
-    public String submit() {
+    public ModelAndView submit() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("submitmessage");
 
-        return "submitmessage";
+        return modelAndView;
     }
+
+
+    // @RequestMapping("/submit")
+    // public String submit() {
+
+    //     return "submitmessage";
+    // }
 }
