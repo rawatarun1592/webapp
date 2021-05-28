@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 <head>
         <title>search_patient_form</title>
@@ -8,7 +8,7 @@
         <h2> search_patient: </h2>
         <form action="/search_patient" method="get">
                 search : <br><input type="text" name="name" /><br><br>
-                
+
 
                 <button type="submit">Search</button>
 
@@ -16,4 +16,60 @@
 
 </body>
 
+</html>  -->
+
+<html>
+
+<head>
+        <title>search_patient_form</title>
+        <script language="JavaScript" type="text/javascript">
+                function rewritePage(form) {
+
+                        var newPage = "<html>\n<head>\n<title>Search page for ";
+                        newPage += form.entry.value;
+                        newPage += "</title>\n</head>\n<body>\n";
+                        newPage += "<h1>Search Results for " + form.entry.value + " below:</h1>\n";
+                        newPage += "</body>\n</html>";
+                        // write it in one blast
+                        document.write(newPage);
+                        // close writing stream
+                        document.close();
+                }</script>
+</head>
+
+<body>
+        <h2> search_patient: </h2>
+        <hr>
+        <form onsubmit="return false;">
+                <p>Enter patient_name: <input type="text" name="entry" id="entry"></P>
+                <input type="button" value="search" onclick="rewritePage(this.form);">
+        </form>
+</body>
+
 </html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<body>
+
+<h3>A demonstration of how to access a Text Field</h3>
+
+<input type="text" id="myText" value="Some text...">
+
+<p>Click the "Try it" button to get the text in the text field.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myText").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html -->
+
