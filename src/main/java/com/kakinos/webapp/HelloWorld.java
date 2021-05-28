@@ -11,22 +11,40 @@ public class HelloWorld {
     @RequestMapping("/")
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("home");
 
         return modelAndView;
     }
-    @RequestMapping("/submit")
-    public ModelAndView submit() {
+
+    @RequestMapping("/new_patient")
+    public ModelAndView new_patient() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("new_patient");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/create_new_patient")
+    public ModelAndView create_new_patient() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("submitmessage");
 
         return modelAndView;
     }
 
+    @RequestMapping("/search_patient_form")
+    public ModelAndView search_patient_form() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search_patient_form");
 
-    // @RequestMapping("/submit")
-    // public String submit() {
+        return modelAndView;
+    }
 
-    //     return "submitmessage";
-    // }
+    @RequestMapping("/search_patient")
+    public ModelAndView search_patient() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search_result");
+
+        return modelAndView;
+    }
 }
