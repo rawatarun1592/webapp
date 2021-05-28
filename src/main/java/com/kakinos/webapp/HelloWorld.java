@@ -36,16 +36,8 @@ public class HelloWorld {
         return modelAndView;
     }
 
-    @RequestMapping("/create_new_patient")
-    public ModelAndView create_new_patient() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("submitmessage");
-
-        return modelAndView;
-    }
-
     @PostMapping("/patient")
-    public ResponseEntity<Patient> createTutorial(@RequestBody Patient patient) {
+    public ResponseEntity<Patient> createPatient() {
     try {
       System.out.println("hello");
     //  Patient _patient = PatientRepository.save(new Patient(patient.getFirstName(), patient.getAge()));
@@ -54,7 +46,15 @@ public class HelloWorld {
       } catch (Exception e) {
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
       }
-  }
+    }
+
+    @RequestMapping("/create_new_patient")
+    public ModelAndView create_new_patient() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("submitmessage");
+
+        return modelAndView;
+    }
 
     @RequestMapping("/search_patient_form")
     public ModelAndView search_patient_form() {
