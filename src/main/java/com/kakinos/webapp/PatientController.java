@@ -5,12 +5,8 @@ import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,46 +35,36 @@ public class PatientController {
         return modelAndView;
     }
 
-    // @PostMapping("/patient")
-    // public ResponseEntity<Patient> createPatient() {
-    // try {
-    //   System.out.println("hello");
-    //  // Patient _patient = patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
-    //   Patient _patient = patientRepository.save(new Patient("Sunny", "IIIT", 25, "male", "Allahabad", 123456));
-    //     return new ResponseEntity<>(_patient, HttpStatus.CREATED);
-    //   } catch (Exception e) {
-    //     return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    //   }
-    // }
-
-    // @PostMapping("/patient")
-    // public ModelAndView createPatient(@RequestBody  Patient patient) {
-    
-    //   System.out.println("hello");
-    //   patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
-    //   ModelAndView modelAndView = new ModelAndView();
-    //   System.out.println("hello hello");
-    //   modelAndView.setViewName("submitmessage");
-
-    //   return modelAndView;
-    //  // return "submitmessage";
-    // }
-
     @RequestMapping(value = "/patient", method = RequestMethod.POST)
     public String savePatient(@ModelAttribute("patient") Patient patient) {
       System.out.println("*************************************************");
         //patientRepository.save(patient);
         patientRepository.save(new Patient(patient.getFirst_name(), patient.getLast_name(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
 
-        return "redirect:/";
+        return "submitmessage";
     }
 
-    // @RequestMapping(value = "/patient", method = RequestMethod.POST)
-    // public String saveProduct(@ModelAttribute("patient") Patient patient) {
-    // service.save(patient);
-     
-    // return "redirect:/";
-    // }
+
+    @RequestMapping(path="/create_new_patient",method=RequestMethod.POST)
+    public ModelAndView create_new_patient(
+        @RequestParam String first_name,
+        @RequestParam String last_name,
+        @RequestParam Integer age,
+        @RequestParam String gender,
+        @RequestParam String city,
+        @RequestParam Integer pincode) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("submitmessage");
+        modelAndView.addObject("first_name", first_name);
+        modelAndView.addObject("last_name", last_name);
+        modelAndView.addObject("age", age);
+        modelAndView.addObject("gender", gender);
+        modelAndView.addObject("city", city);
+        modelAndView.addObject("pincode", pincode);
+
+
+        return modelAndView;
+    }
 
     @RequestMapping("/create_new_patient")
     public ModelAndView create_new_patient() {
