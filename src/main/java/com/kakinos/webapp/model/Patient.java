@@ -93,8 +93,6 @@ public class Patient {
     this.pincode = pincode;
   }
 
-  
-
   // @Override
   // public String toString() {
   //   return "Patient [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", age="  + age + ", gender=" + gender + ", city="  + city + ", pincode=" + pincode + "]";

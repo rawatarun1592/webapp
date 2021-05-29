@@ -65,14 +65,6 @@ public class PatientController {
         return modelAndView;
     }
 
-    @RequestMapping("/create_new_patient")
-    public ModelAndView create_new_patient() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("submitmessage");
-
-        return modelAndView;
-    }
-
     @RequestMapping("/search_patient_form")
     public ModelAndView search_patient_form() {
         ModelAndView modelAndView = new ModelAndView();
