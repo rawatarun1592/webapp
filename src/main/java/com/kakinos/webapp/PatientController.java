@@ -64,12 +64,20 @@ public class PatientController {
     // }
 
     @RequestMapping(value = "/patient", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("patient") Patient patient) {
-      System.out.println("hello");
-    patientRepository.save(patient);
+    public String savePatient(@ModelAttribute("patient") Patient patient) {
+      System.out.println("*************************************************");
+        //patientRepository.save(patient);
+        patientRepository.save(new Patient(patient.getFirst_name(), patient.getLast_name(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
+
+        return "redirect:/";
+    }
+
+    // @RequestMapping(value = "/patient", method = RequestMethod.POST)
+    // public String saveProduct(@ModelAttribute("patient") Patient patient) {
+    // service.save(patient);
      
-    return "submitmessage";
-}
+    // return "redirect:/";
+    // }
 
     @RequestMapping("/create_new_patient")
     public ModelAndView create_new_patient() {
