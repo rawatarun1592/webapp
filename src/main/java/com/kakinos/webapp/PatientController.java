@@ -5,14 +5,15 @@ import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -95,10 +96,12 @@ public class PatientController {
         return modelAndView;
     }
 
-    @RequestMapping("/search_patient")
-    public ModelAndView search_patient() {
+    @RequestMapping(path="/search_patient",method=RequestMethod.POST)
+    public ModelAndView search_patient(@RequestParam String name) 
+    {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search_result");
+        modelAndView.addObject("name", name);
 
         return modelAndView;
     }
