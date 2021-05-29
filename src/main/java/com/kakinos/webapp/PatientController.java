@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @EnableAutoConfiguration
-public class HelloWorld {
+public class PatientController {
 
     @Autowired
     PatientRepository patientRepository;
@@ -38,20 +38,20 @@ public class HelloWorld {
         return modelAndView;
     }
 
-    @PostMapping("/patient")
-    public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-    try {
-      System.out.println("hello");
-      Patient _patient = patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
-     // Patient _patient = patientRepository.save(new Patient("Sunny", "IIIT", 25, "male", "Allahabad", 123456));
-        return new ResponseEntity<>(_patient, HttpStatus.CREATED);
-      } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-    }
+    // @PostMapping("/patient")
+    // public ResponseEntity<Patient> createPatient() {
+    // try {
+    //   System.out.println("hello");
+    //  // Patient _patient = patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
+    //   Patient _patient = patientRepository.save(new Patient("Sunny", "IIIT", 25, "male", "Allahabad", 123456));
+    //     return new ResponseEntity<>(_patient, HttpStatus.CREATED);
+    //   } catch (Exception e) {
+    //     return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    //   }
+    // }
 
     // @PostMapping("/patient")
-    // public ModelAndView createPatient(@ModelAttribute("patient")  Patient patient) {
+    // public ModelAndView createPatient(@RequestBody  Patient patient) {
     
     //   System.out.println("hello");
     //   patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
@@ -63,13 +63,13 @@ public class HelloWorld {
     //  // return "submitmessage";
     // }
 
-//     @RequestMapping(value = "/patient", method = RequestMethod.POST)
-//     public String saveProduct(@ModelAttribute("patient") Patient patient) {
-//       System.out.println("hello");
-//     patientRepository.save(patient);
+    @RequestMapping(value = "/patient", method = RequestMethod.POST)
+    public String saveProduct(@ModelAttribute("patient") Patient patient) {
+      System.out.println("hello");
+    patientRepository.save(patient);
      
-//     return "redirect:/";
-// }
+    return "submitmessage";
+}
 
     @RequestMapping("/create_new_patient")
     public ModelAndView create_new_patient() {
