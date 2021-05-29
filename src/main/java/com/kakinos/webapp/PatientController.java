@@ -35,24 +35,24 @@ public class PatientController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/patient", method = RequestMethod.POST)
-    public String savePatient(@ModelAttribute("patient") Patient patient) {
-      System.out.println("*************************************************");
-        //patientRepository.save(patient);
-        patientRepository.save(new Patient(patient.getFirst_name(), patient.getLast_name(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
+    // @RequestMapping(value = "/patient", method = RequestMethod.POST)
+    // public String savePatient(@ModelAttribute("patient") Patient patient) {
+    //   System.out.println("*************************************************");
+    //     //patientRepository.save(patient);
+    //     patientRepository.save(new Patient(patient.getFirst_name(), patient.getLast_name(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
 
-        return "submitmessage";
-    }
-
+    //     return "submitmessage";
+    // }
 
     @RequestMapping(path="/create_new_patient",method=RequestMethod.POST)
-    public ModelAndView create_new_patient(
+    public ModelAndView create_new_patient(@ModelAttribute("patient") Patient patient, 
         @RequestParam String first_name,
         @RequestParam String last_name,
         @RequestParam Integer age,
         @RequestParam String gender,
         @RequestParam String city,
         @RequestParam Integer pincode) {
+        patientRepository.save(new Patient(patient.getFirst_name(), patient.getLast_name(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPinCode()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("submitmessage");
         modelAndView.addObject("first_name", first_name);
@@ -61,7 +61,6 @@ public class PatientController {
         modelAndView.addObject("gender", gender);
         modelAndView.addObject("city", city);
         modelAndView.addObject("pincode", pincode);
-
 
         return modelAndView;
     }
