@@ -9,7 +9,7 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
+            <th>Patient ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
@@ -17,8 +17,6 @@
             <th>City</th>
             <th>Pin Code</th>
             <th>Action</th>
-
-
         </tr>
         </thead>
         <tbody>
@@ -31,6 +29,8 @@
                 <td th:text="${patient.city}"></td>
                 <td th:text="${patient.pincode}"></td>
                 <td>
+                    <a th:href="@{'/edit/' + ${patient.id}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/delete/' + ${patient.id}}">Delete</a>
                 </td>
             </tr>

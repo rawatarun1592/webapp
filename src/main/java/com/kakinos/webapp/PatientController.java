@@ -1,13 +1,19 @@
 package com.kakinos.webapp;
 
+import java.util.Optional;
+
 import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,13 +82,7 @@ public class PatientController {
 
         return modelAndView;
     }
-    
-    @RequestMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable(name = "id") String id) {
-    patientRepository.deleteById(id);
-    return "redirect:/";       
-    }
-    
+
     // @RequestMapping(path="/search_patient",method=RequestMethod.GET)
     // public List<Patient> search_patient(@RequestParam String firstName) 
     // {
@@ -90,4 +90,47 @@ public class PatientController {
     //    // return patientRepository.findById(id);
     //     //return patient.get();
     // }
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showEditPatientPage(@PathVariable(name = "id") String id) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("edit_patient");
+    // Patient patient = patientRepository.get(id);
+    modelAndView.addObject("patient", patientRepository.findById(id));
+    modelAndView.addObject("id", id);
+    return modelAndView;
+    }
+
+    @RequestMapping(path="/update/{id}",method=RequestMethod.POST)
+    public ModelAndView updateDept(@ModelAttribute("patient") Patient patient, @PathVariable String id)
+        {
+        Optional<Patient> patientData = patientRepository.findById(id);
+        Patient _patient = patientData.get();
+        _patient.setFirstName(patient.getFirstName());
+        _patient.setLastName(patient.getLastName());
+        _patient.setAge(patient.getAge());
+        _patient.setGender(patient.getGender());
+        _patient.setCity(patient.getCity());
+        _patient.setPincode(patient.getPincode());
+        patientRepository.save(_patient);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("submitmessage");
+        modelAndView.addObject("firstName", _patient.getFirstName());
+        modelAndView.addObject("lastName", _patient.getLastName());
+        modelAndView.addObject("age", _patient.getAge());
+        modelAndView.addObject("gender", _patient.getGender());
+        modelAndView.addObject("city", _patient.getCity());
+        modelAndView.addObject("pincode", _patient.getPincode());
+    
+        return modelAndView;
+        
+    }
+    
+    @RequestMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") String id) {
+    patientRepository.deleteById(id);
+    return "redirect:/";       
+    }
+    
+    
 }
