@@ -8,8 +8,8 @@ public class Patient {
   @Id
   private String id;
 
-  private String first_name;
-  private String last_name;
+  private String firstName;
+  private String lastName;
   private int age;
   private String gender;
   private String city;
@@ -19,9 +19,9 @@ public class Patient {
 
   }
 
-  public Patient(String first_name, String last_name, int age, String gender, String city, int pincode) {
-    this.first_name = first_name;
-    this.last_name = last_name;
+  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.age = age;
     this.gender = gender;
     this.city = city;
@@ -37,28 +37,20 @@ public class Patient {
     this.id = id;
   }
 
-  public String getFirst_name() {
-    return first_name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setFirst_name(String first_name) {
-    this.first_name = first_name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setLast_name(String last_name) {
-    this.last_name = last_name;
-  }
-
-  public int getPincode() {
-    return pincode;
-  }
-
-  public void setPincode(int pincode) {
-    this.pincode = pincode;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public int getAge() {
@@ -85,13 +77,15 @@ public class Patient {
     this.city = city;
   }
 
-  public int getPinCode() {
+  public int getPincode() {
     return pincode;
   }
 
-  public void setPinCode(int pincode) {
+  public void setPincode(int pincode) {
     this.pincode = pincode;
   }
+
+  
 
   // @Override
   // public String toString() {
