@@ -1,20 +1,16 @@
 package com.kakinos.webapp;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -69,39 +65,20 @@ public class PatientController {
         return modelAndView;
     }
 
-    // @RequestMapping(path="/search_patient")
-    // public ModelAndView search_patient(@RequestParam String name) 
-    // {
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     modelAndView.setViewName("search_result");
-    //     modelAndView.addObject("patient", patientRepository.findByFirstName(name));
-    //     System.out.println(patientRepository.findAll());
-    //     return modelAndView;
-    // }
-
-    // @RequestMapping("/search_patient")
-    // public List<Patient> getByFirstName(@PathVariable String firstName) {
-    //     List<Patient> patients = this.patientRepository.findByFirstName(firstName);
-    //     System.out.println("********************************");
-    //     return patients;
-    // }
-
     @RequestMapping(path="/search_patient",method=RequestMethod.GET)
-    public ModelAndView search_patient(@RequestParam String firstname) 
+    public ModelAndView search_patient(@RequestParam String firstName) 
     {
-       // patientRepository.findByName(name);
-       // patientRepository.findByFirstName(firstname);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search_result");
-        modelAndView.addObject("patient", patientRepository.findByFirstName(firstname));
+        modelAndView.addObject("patients", patientRepository.findByFirstName(firstName));
 
         return modelAndView;
     }
+    
     // @RequestMapping(path="/search_patient",method=RequestMethod.GET)
     // public List<Patient> search_patient(@RequestParam String firstName) 
     // {
     //     return patientRepository.findByFirstName(firstName);
-    //    // patientRepository.findByName(name);
     //    // return patientRepository.findById(id);
     //     //return patient.get();
     // }

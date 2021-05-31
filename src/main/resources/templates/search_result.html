@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="Name : ${patient}">
+            <tr th:each="patient : ${patients}">
                 <td th:text="${patient.firstName}"></td>
                 <td th:text="${patient.lastName}"></td>
                 <td th:text="${patient.age}"></td>
