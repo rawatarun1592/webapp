@@ -9,21 +9,18 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>City</th>
             <th>Pin Code</th>
-            <th>Action</th>
-
+            <th>Actions</th>
 
         </tr>
         </thead>
         <tbody>
             <tr th:each="patient : ${patients}">
-                <td th:text="${patient.id}"></td>
                 <td th:text="${patient.firstName}"></td>
                 <td th:text="${patient.lastName}"></td>
                 <td th:text="${patient.age}"></td>
@@ -31,7 +28,7 @@
                 <td th:text="${patient.city}"></td>
                 <td th:text="${patient.pincode}"></td>
                 <td>
-                    <a th:href="@{'/delete/' + ${patient.id}}">Delete</a>
+                    <a th:href="/@{'/delete/' + ${patient.id}}">Delete</a>
                 </td>
             </tr>
             </tbody>

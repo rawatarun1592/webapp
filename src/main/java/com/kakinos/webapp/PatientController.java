@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +75,12 @@ public class PatientController {
         modelAndView.addObject("patients", patientRepository.findByFirstName(firstName));
 
         return modelAndView;
+    }
+    
+    @RequestMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") String id) {
+    patientRepository.deleteById(id);
+    return "redirect:/";       
     }
     
     // @RequestMapping(path="/search_patient",method=RequestMethod.GET)
