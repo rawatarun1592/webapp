@@ -1,6 +1,6 @@
 package com.kakinos.webapp;
 
-//import java.util.Optional;
+import java.util.Optional;
 
 import com.kakinos.webapp.model.Doctor;
 //import com.kakinos.webapp.model.Patient;
@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +60,62 @@ public class DoctorController {
         modelAndView.addObject("pincode", pincode);
 
         return modelAndView;
+    }
+    @RequestMapping(path="/search_doctor_form",method=RequestMethod.GET)
+    public ModelAndView search_doctor_form() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search_doctor_form");
+
+        return modelAndView;
+    }
+    @RequestMapping(path="/search_doctor",method=RequestMethod.GET)
+    public ModelAndView search_doctor(@RequestParam String firstName) 
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search_doctor_result");
+        modelAndView.addObject("doctors", doctorRepository.findByFirstName(firstName));
+
+        return modelAndView;
+    }
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showEditDoctorPage(@PathVariable(name = "id") String id) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("edit_doctor");
+    // Patient patient = patientRepository.get(id);
+    modelAndView.addObject("doctor", doctorRepository.findById(id));
+    modelAndView.addObject("id", id);
+    return modelAndView;
+    }
+    @RequestMapping(path="/update/{id}",method=RequestMethod.POST)
+    public ModelAndView updatePatient(@ModelAttribute("doctor") Doctor doctor, @PathVariable String id)
+        {
+        Optional<Doctor> doctorData = doctorRepository.findById(id);
+        Doctor _doctor = doctorData.get();
+        _doctor.setFirstName(doctor.getFirstName());
+        _doctor.setLastName(doctor.getLastName());
+        _doctor.setSpecialization(doctor.getSpecialization());
+        _doctor.setPhoneNumber(doctor.getPhoneNumber());
+        _doctor.setAddress(doctor.getAddress());
+        _doctor.setCity(doctor.getCity());
+        _doctor.setPincode(doctor.getPincode());
+        doctorRepository.save(_doctor);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("submitdoctor");
+        modelAndView.addObject("firstName", _doctor.getFirstName());
+        modelAndView.addObject("lastName", _doctor.getLastName());
+        modelAndView.addObject("specialization", _doctor.getSpecialization());
+        modelAndView.addObject("phoneNumber", _doctor.getPhoneNumber());
+        modelAndView.addObject("address", _doctor.getAddress());
+        modelAndView.addObject("city", _doctor.getCity());
+        modelAndView.addObject("pincode", _doctor.getPincode());
+    
+        return modelAndView;
+        
+    }
+    @RequestMapping("/delete/{id}")
+    public String deleteDoctor(@PathVariable(name = "id") String id) {
+    doctorRepository.deleteById(id);
+    return "redirect:/";       
     }
     
 }

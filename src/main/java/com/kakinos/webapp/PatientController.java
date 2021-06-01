@@ -127,7 +127,7 @@ public class PatientController {
     }
     
     @RequestMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable(name = "id") String id) {
+    public String deletePatient(@PathVariable(name = "id") String id) {
     patientRepository.deleteById(id);
     return "redirect:/";       
     }

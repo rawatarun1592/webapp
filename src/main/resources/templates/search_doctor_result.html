@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Search fields</title>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  -->
+    <head>
+<body>
+    <h1> Search doctor's result below:</h1>
+    <hr>
+    <table>
+        <thead>
+        <tr>
+            <th>Doctor ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Specialization</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Pin Code</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.id}"></td>
+                <td th:text="${doctor.firstName}"></td>
+                <td th:text="${doctor.lastName}"></td>
+                <td th:text="${doctor.specialization}"></td>
+                <td th:text="${doctor.phoneNumber}"></td>
+                <td th:text="${doctor.address}"></td>
+                <td th:text="${doctor.city}"></td>
+                <td th:text="${doctor.pincode}"></td>
+                <td>
+                    <a th:href="@{'/edit/' + ${doctor.id}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/' + ${doctor.id}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+</body>
+</html>
+
