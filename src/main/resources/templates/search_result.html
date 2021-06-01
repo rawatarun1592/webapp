@@ -17,6 +17,7 @@
             <th>City</th>
             <th>Pin Code</th>
             <th>Action</th>
+            <th>Add Photo</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,10 @@
                     <a th:href="@{'/edit/' + ${patient.id}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/delete/' + ${patient.id}}">Delete</a>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="upload_photo">Profile Pic</a>
                 </td>
             </tr>
             </tbody>

@@ -1,5 +1,6 @@
 package com.kakinos.webapp.model;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,6 +15,7 @@ public class Patient {
   private String gender;
   private String city;
   private int pincode;
+  private Binary image;
 
   public Patient() {
 
@@ -26,6 +28,7 @@ public class Patient {
     this.gender = gender;
     this.city = city;
     this.pincode = pincode;
+   // this.image = image;
   }
 
   public String getId() {
@@ -83,6 +86,14 @@ public class Patient {
 
   public void setPincode(int pincode) {
     this.pincode = pincode;
+  }
+
+  public Binary getImage() {
+    return image;
+  }
+
+  public void setImage(Binary image) {
+    this.image = image;
   }
 
   

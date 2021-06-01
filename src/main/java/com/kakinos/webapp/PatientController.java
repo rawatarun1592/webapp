@@ -7,18 +7,12 @@ import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -130,6 +124,42 @@ public class PatientController {
     public String deletePatient(@PathVariable(name = "id") String id) {
     patientRepository.deleteById(id);
     return "redirect:/";       
+    }
+
+    // public String addPhoto(String title, MultipartFile file) throws IOException { 
+    //     Patient photo = new Patient(title); 
+    //     photo.setImage(
+    //       new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
+    //     patient = patientRepository.insert(photo); return photo.getId(); 
+    // }
+
+    // public Patient getPhoto(String id) { 
+    //     return patientRepository.findById(id).get(); 
+    // }
+
+    // @RequestMapping("/photos/add")
+    // public String addPhoto(@RequestParam("title") String title, 
+    // @RequestParam("image") MultipartFile image, Model model) 
+    // throws IOException {
+    //     String id = Service.addPhoto(title, image);
+    // return "redirect:/photos/" + id;
+    // }
+
+    // @RequestMapping("/photos/{id}")
+    // public String getPhoto(@PathVariable String id, Model model) {
+    //     Photo photo = photoService.getPhoto(id);
+    //     model.addAttribute("title", photo.getTitle());
+    //     model.addAttribute("image", 
+    //     Base64.getEncoder().encodeToString(photo.getImage().getData()));
+    //     return "photos";
+    // }
+
+    @RequestMapping(path="/upload_photo", method = RequestMethod.GET)
+    public ModelAndView upload_photo() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("uploadPhoto");
+
+        return modelAndView;
     }
        
 }
