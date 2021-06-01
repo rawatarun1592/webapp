@@ -31,9 +31,9 @@
                 <td th:text="${doctor.city}"></td>
                 <td th:text="${doctor.pincode}"></td>
                 <td>
-                    <a th:href="@{'/edit/' + ${doctor.id}}">Edit</a>
+                    <a th:href=" @{'/edit1/' + ${doctor.id}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete/' + ${doctor.id}}">Delete</a>
+                    <a th:href="@{'/delete1/' + ${doctor.id}}">Delete</a>
                 </td>
             </tr>
             </tbody>

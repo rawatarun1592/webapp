@@ -77,7 +77,7 @@ public class DoctorController {
 
         return modelAndView;
     }
-    @RequestMapping("/edit/{id}")
+    @RequestMapping(value = "/edit1/{id}")
     public ModelAndView showEditDoctorPage(@PathVariable(name = "id") String id) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("edit_doctor");
@@ -86,7 +86,7 @@ public class DoctorController {
     modelAndView.addObject("id", id);
     return modelAndView;
     }
-    @RequestMapping(path="/update/{id}",method=RequestMethod.POST)
+    @RequestMapping(value ="/update1/{id}",method=RequestMethod.POST)
     public ModelAndView updatePatient(@ModelAttribute("doctor") Doctor doctor, @PathVariable String id)
         {
         Optional<Doctor> doctorData = doctorRepository.findById(id);
@@ -112,7 +112,7 @@ public class DoctorController {
         return modelAndView;
         
     }
-    @RequestMapping("/delete/{id}")
+    @RequestMapping(value = "/delete1/{id}")
     public String deleteDoctor(@PathVariable(name = "id") String id) {
     doctorRepository.deleteById(id);
     return "redirect:/";       
