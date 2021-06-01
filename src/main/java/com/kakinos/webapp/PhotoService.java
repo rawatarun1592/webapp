@@ -14,16 +14,22 @@ import org.springframework.web.multipart.MultipartFile;
 public class PhotoService {
 
     @Autowired
-    private static PhotoRepository photoRepo;
+    private PhotoRepository photoRepo;
 
-    public static String addPhoto(String title, MultipartFile file) throws IOException { 
-        Photo photo = new Photo(title, title, null); 
+    public String addPhoto(String title, MultipartFile file) throws IOException { 
+        Photo photo = new Photo(title); 
         photo.setImage(
           new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-        photo = photoRepo.insert(photo); return photo.getId(); 
+          System.out.println("before inserting photo************");
+        photo = photoRepo.insert(photo); 
+        System.out.println("after inserting photo************");
+        return photo.getId(); 
     }
 
-    public static Photo getPhoto(String id) { 
-        return photoRepo.findById(id).get(); 
+    public Photo getPhoto(String id) { 
+        Photo photo = new Photo();
+        photo = photoRepo.findById(id).get(); 
+        System.out.println("photo" + photo.getImage());
+        return photo;
     }
 }

@@ -14,6 +14,14 @@ public class Photo {
         
     private Binary image;
 
+    public Photo() {
+        
+    }
+
+    public Photo(String title) {
+        this.title = title; 
+    }
+    
     public Photo(String id, String title, Binary image) {
         this.id = id;
         this.title = title;
