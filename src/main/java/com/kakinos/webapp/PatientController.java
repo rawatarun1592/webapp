@@ -102,7 +102,7 @@ public class PatientController {
     }
 
     @RequestMapping(path="/update/{id}",method=RequestMethod.POST)
-    public ModelAndView updateDept(@ModelAttribute("patient") Patient patient, @PathVariable String id)
+    public ModelAndView updatePatient(@ModelAttribute("patient") Patient patient, @PathVariable String id)
         {
         Optional<Patient> patientData = patientRepository.findById(id);
         Patient _patient = patientData.get();
