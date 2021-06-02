@@ -118,24 +118,11 @@ public class PatientController {
     return "redirect:/";       
     }
 
-    
-
-    // // @RequestMapping("/photos/{id}")
-    // // public String getPhoto(@PathVariable String id, Model model) {
-    // //     Photo photo = photoService.getPhoto(id);
-    // //     model.addAttribute("title", photo.getTitle());
-    // //     model.addAttribute("image", 
-    // //     Base64.getEncoder().encodeToString(photo.getImage().getData()));
-    // //     return "photos";
-    // // }
-
     @RequestMapping(path="/upload_photo/{id}", method = RequestMethod.GET)
     public ModelAndView upload_photo(@PathVariable(name = "id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("uploadPhoto");
-        modelAndView.addObject("patient", patientRepository.findById(id));
         modelAndView.addObject("id", id);
-
         return modelAndView;
     }
 

@@ -22,22 +22,18 @@ public class PhotoService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public void addPhoto(String title, MultipartFile file, Patient patient) throws IOException { 
-        Photo photo = new Photo(title); 
-        photo.setImage(
-          new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-          System.out.println("before inserting photo************");
-       // photo = photoRepo.insert(photo); 
-       patient.setPhoto(photo);
-       patientRepository.save(patient);
-       // System.out.println("after inserting photo************");
-       // return photo.getId(); 
+    public void addPhoto(String title, MultipartFile file, Patient patient) throws IOException {
+        Photo photo = new Photo(title);
+        photo.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        System.out.println("before inserting photo************");
+        patient.setPhoto(photo);
+        patientRepository.save(patient);
+        System.out.println("after inserting photo************");
     }
 
-    public Photo getPhoto(String id) { 
+    public Photo getPhoto(String id) {
         Photo photo = new Photo();
-        photo = photoRepo.findById(id).get(); 
-        System.out.println("photo" + photo.getImage());
+        photo = photoRepo.findById(id).get();
         return photo;
     }
 }
