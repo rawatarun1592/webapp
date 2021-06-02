@@ -3,6 +3,7 @@
       <title>Display Entries</title>
   </head>
     <body>
+      <img alt="sample" th:src="*{'data:image/png;base64,'+image}" />
         <h3 th:text="'First Name: ' + ${firstName}"></h3>
         <h3 th:text="'Last Name: ' + ${lastName}"></h3>
         <h3 th:text="'Age: ' + ${age}"></h3>
@@ -12,4 +13,5 @@
         <h1> Thank You for joining us!!</h1>
     </body>
     
+
     </html>
