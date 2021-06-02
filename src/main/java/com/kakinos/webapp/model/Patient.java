@@ -21,6 +21,10 @@ public class Patient {
 
   }
 
+  public Patient(Binary image) {
+    this.image = image;
+  }
+
   public Patient(String firstName, String lastName, int age, String gender, String city, int pincode) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -28,7 +32,7 @@ public class Patient {
     this.gender = gender;
     this.city = city;
     this.pincode = pincode;
-   // this.image = image;
+    
   }
 
   public String getId() {

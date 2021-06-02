@@ -29,34 +29,17 @@ public class PhotoController {
     throws IOException {
     String id = photoService.addPhoto(title, image);
     System.out.println("insert add photo" + id);
-    return "redirect:/photos/" + id;
-    // return "Profile Uploaded";
+    // return "redirect:/photos/" + id;
+    return "view";
 
     }
 
     @GetMapping("/photos/{id}")
-    public ModelAndView getPhoto(@PathVariable String id, Model model, @ModelAttribute("patient") Patient patient) 
-    // @RequestParam String firstName,
-    // @RequestParam String lastName,
-    // @RequestParam Integer age,
-    // @RequestParam String gender,
-    // @RequestParam String city,
-    // @RequestParam Integer pincode) 
-    {
-    Photo photo = photoService.getPhoto(id);
-    model.addAttribute("title", photo.getTitle());
-    model.addAttribute("image", 
-    Base64.getEncoder().encodeToString(photo.getImage().getData()));
-   // return "photo";
-   ModelAndView modelAndView = new ModelAndView();
-   modelAndView.setViewName("submitmessage");
-   modelAndView.addObject("firstName", patient.getFirstName());
-        modelAndView.addObject("lastName", patient.getLastName());
-        modelAndView.addObject("age", patient.getAge());
-        modelAndView.addObject("gender", patient.getGender());
-        modelAndView.addObject("city", patient.getCity());
-        modelAndView.addObject("pincode", patient.getPincode());
-    
-        return modelAndView;
-}
+    public String getPhoto(@PathVariable String id, Model model) {
+        Photo photo = photoService.getPhoto(id);
+        model.addAttribute("title", photo.getTitle());
+        model.addAttribute("image", 
+          Base64.getEncoder().encodeToString(photo.getImage().getData()));
+        return "photo";
+    }
 }

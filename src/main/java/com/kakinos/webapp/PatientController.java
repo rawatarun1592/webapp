@@ -161,5 +161,11 @@ public class PatientController {
 
         return modelAndView;
     }
-       
+    @RequestMapping(path="/view_photo", method = RequestMethod.GET)
+    public ModelAndView view_photo() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("photo");
+
+        return modelAndView;
+    }
 }
