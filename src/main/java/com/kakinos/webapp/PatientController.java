@@ -77,14 +77,6 @@ public class PatientController {
         return modelAndView;
     }
 
-    // @RequestMapping(path="/search_patient",method=RequestMethod.GET)
-    // public List<Patient> search_patient(@RequestParam String firstName) 
-    // {
-    //     return patientRepository.findByFirstName(firstName);
-    //    // return patientRepository.findById(id);
-    //     //return patient.get();
-    // }
-
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditPatientPage(@PathVariable(name = "id") String id) {
     ModelAndView modelAndView = new ModelAndView();
@@ -126,40 +118,53 @@ public class PatientController {
     return "redirect:/";       
     }
 
-    // public String addPhoto(String title, MultipartFile file) throws IOException { 
-    //     Patient photo = new Patient(title); 
-    //     photo.setImage(
-    //       new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-    //     patient = patientRepository.insert(photo); return photo.getId(); 
-    // }
+    
 
-    // public Patient getPhoto(String id) { 
-    //     return patientRepository.findById(id).get(); 
-    // }
+    // // @RequestMapping("/photos/{id}")
+    // // public String getPhoto(@PathVariable String id, Model model) {
+    // //     Photo photo = photoService.getPhoto(id);
+    // //     model.addAttribute("title", photo.getTitle());
+    // //     model.addAttribute("image", 
+    // //     Base64.getEncoder().encodeToString(photo.getImage().getData()));
+    // //     return "photos";
+    // // }
 
-    // @RequestMapping("/photos/add")
-    // public String addPhoto(@RequestParam("title") String title, 
-    // @RequestParam("image") MultipartFile image, Model model) 
-    // throws IOException {
-    //     String id = Service.addPhoto(title, image);
-    // return "redirect:/photos/" + id;
-    // }
-
-    // @RequestMapping("/photos/{id}")
-    // public String getPhoto(@PathVariable String id, Model model) {
-    //     Photo photo = photoService.getPhoto(id);
-    //     model.addAttribute("title", photo.getTitle());
-    //     model.addAttribute("image", 
-    //     Base64.getEncoder().encodeToString(photo.getImage().getData()));
-    //     return "photos";
-    // }
-
-    @RequestMapping(path="/upload_photo", method = RequestMethod.GET)
-    public ModelAndView upload_photo() {
+    @RequestMapping(path="/upload_photo/{id}", method = RequestMethod.GET)
+    public ModelAndView upload_photo(@PathVariable(name = "id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("uploadPhoto");
+        modelAndView.addObject("patient", patientRepository.findById(id));
+        modelAndView.addObject("id", id);
 
         return modelAndView;
     }
+
+    // @RequestMapping(path = "/updated_profile/{id}",method=RequestMethod.GET)
+    // public ModelAndView updated_profile(@ModelAttribute("patient") Patient patient, @PathVariable String id)
+    //     {
+    //     Optional<Patient> patientData = patientRepository.findById(id);
+    //     Patient _patient = patientData.get();
+    //     System.out.println(patientData.get().getFirstName());
+    //     _patient.setFirstName(patient.getFirstName());
+    //     _patient.setLastName(patient.getLastName());
+    //     _patient.setAge(patient.getAge());
+    //     _patient.setGender(patient.getGender());
+    //     _patient.setCity(patient.getCity());
+    //     _patient.setPincode(patient.getPincode());
+    //     _patient.setPhoto(patient.getPhoto());
+    //     patientRepository.save(_patient);
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     modelAndView.setViewName("submitmessage");
+    //     modelAndView.addObject("firstName", _patient.getFirstName());
+    //     modelAndView.addObject("lastName", _patient.getLastName());
+    //     modelAndView.addObject("age", _patient.getAge());
+    //     modelAndView.addObject("gender", _patient.getGender());
+    //     modelAndView.addObject("city", _patient.getCity());
+    //     modelAndView.addObject("pincode", _patient.getPincode());
+    //     modelAndView.addObject("photo", _patient.getPhoto());
+    
+    //     return modelAndView;
+        
+    // }
        
 }

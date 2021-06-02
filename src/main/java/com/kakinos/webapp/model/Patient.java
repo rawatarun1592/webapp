@@ -15,7 +15,8 @@ public class Patient {
   private String gender;
   private String city;
   private int pincode;
-  private Binary image;
+  private Photo photo;
+  
 
   public Patient() {
 
@@ -28,7 +29,6 @@ public class Patient {
     this.gender = gender;
     this.city = city;
     this.pincode = pincode;
-   // this.image = image;
   }
 
   public String getId() {
@@ -88,15 +88,14 @@ public class Patient {
     this.pincode = pincode;
   }
 
-  public Binary getImage() {
-    return image;
+  public Photo getPhoto() {
+    return photo;
   }
 
-  public void setImage(Binary image) {
-    this.image = image;
+  public void setPhoto(Photo photo) {
+    this.photo = photo;
   }
 
-  
 
   // @Override
   // public String toString() {

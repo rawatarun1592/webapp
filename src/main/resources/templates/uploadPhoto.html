@@ -1,7 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 <h1>Upload new Photo</h1>
-<form action="/photos/add" method="post" enctype="multipart/form-data">
+<form action="#" th:action="@{'photos/add/' + ${id}}"  method="get" enctype="multipart/form-data">
     Title:<input type="text" name="title" />
     Image:<input type="file" name="image" accept="image/*" />
     <input type="submit" value="Upload" />

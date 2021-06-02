@@ -1,7 +1,10 @@
 package com.kakinos.webapp;
 
 import java.io.IOException;
+
+import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.model.Photo;
+import com.kakinos.webapp.repository.PatientRepository;
 import com.kakinos.webapp.repository.PhotoRepository;
 
 import org.bson.BsonBinarySubType;
@@ -16,14 +19,19 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepo;
 
-    public String addPhoto(String title, MultipartFile file) throws IOException { 
+    @Autowired
+    private PatientRepository patientRepository;
+
+    public void addPhoto(String title, MultipartFile file, Patient patient) throws IOException { 
         Photo photo = new Photo(title); 
         photo.setImage(
           new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
           System.out.println("before inserting photo************");
-        photo = photoRepo.insert(photo); 
-        System.out.println("after inserting photo************");
-        return photo.getId(); 
+       // photo = photoRepo.insert(photo); 
+       patient.setPhoto(photo);
+       patientRepository.save(patient);
+       // System.out.println("after inserting photo************");
+       // return photo.getId(); 
     }
 
     public Photo getPhoto(String id) { 

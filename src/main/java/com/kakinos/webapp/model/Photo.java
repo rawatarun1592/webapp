@@ -1,14 +1,8 @@
 package com.kakinos.webapp.model;
 
 import org.bson.types.Binary;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "photos")
 public class Photo {
-    
-    @Id
-    private String id;
     
     private String title;
         
@@ -22,18 +16,9 @@ public class Photo {
         this.title = title; 
     }
     
-    public Photo(String id, String title, Binary image) {
-        this.id = id;
+    public Photo(String title, Binary image) {
         this.title = title;
         this.image = image;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -51,6 +36,5 @@ public class Photo {
     public void setImage(Binary image) {
         this.image = image;
     }
-
     
 }
