@@ -36,7 +36,7 @@ public class DoctorController {
         @RequestParam String firstName,
         @RequestParam String lastName,
         @RequestParam String specialization,
-        @RequestParam Integer phoneNumber,
+        @RequestParam String phoneNumber,
         @RequestParam String address,
         @RequestParam String city,
         @RequestParam Integer pincode) {
@@ -65,8 +65,8 @@ public class DoctorController {
     {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search_doctor_result");
-        modelAndView.addObject("doctors", doctorRepository.getBySpecialization(specialization));
-        modelAndView.addObject("doctors", doctorRepository.getByCity(city));
+        modelAndView.addObject("doctors", doctorRepository.findBySpecializationAndCity(specialization, city));
+        //modelAndView.addObject("doctors", doctorRepository.getByCity(city));
 
         return modelAndView;
     }
