@@ -17,7 +17,8 @@
             <th>City</th>
             <th>Pin Code</th>
             <th>Action</th>
-            <th>Add Photo</th>
+            <th>Upload Profile Photo</th>
+            <th>View Profile</th>
         </tr>
         </thead>
         <tbody>
@@ -35,8 +36,10 @@
                     <a th:href="@{'/delete/' + ${patient.id}}">Delete</a>
                 </td>
                 <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <a th:href="upload_photo">Profile Pic</a>
+                    <a th:href="@{'/upload_pic/' + ${patient.id}}">Upload Profile Picture</a>
+                </td>
+                <td>
+                    <a th:href="@{'/view/' + ${patient.id}}">View Profile</a>
                 </td>
             </tr>
             </tbody>
@@ -44,4 +47,3 @@
 
 </body>
 </html>
-

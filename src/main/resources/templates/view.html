@@ -1,39 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Search fields</title>
-    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  -->
-    <head>
-<body>
-    <h1> Search result below:</h1>
-    <hr>
-    <table>
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>City</th>
-            <th>Pin Code</th>
-            <th>Actions</th>
-
-        </tr>
-        </thead>
-        <tbody>
-            <tr th:each="patient : ${patients}">
-                <td th:text="${patient.firstName}"></td>
-                <td th:text="${patient.lastName}"></td>
-                <td th:text="${patient.age}"></td>
-                <td th:text="${patient.gender}"></td>
-                <td th:text="${patient.city}"></td>
-                <td th:text="${patient.pincode}"></td>
-                <td>
-                    <a th:href="/@{'/delete/' + ${patient.id}}">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-</body>
-</html>
-
+  <head>
+      <title>Patient Details</title>
+  </head>
+    <body>
+      <h1 th:text= "${firstName} +' ' + ${lastName} + ' Profile'" ></h1>
+      <img th:src="@{${PhotosImagePath}}" />
+        <h3 th:text="'First Name: ' + ${firstName}"></h3>
+        <h3 th:text="'Last Name: ' + ${lastName}"></h3>
+        <h3 th:text="'Age: ' + ${age}"></h3>
+        <h3 th:text="'Gender: ' + ${gender}"></h3>
+        <h3 th:text="'City: ' + ${city}"></h3>
+        <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
+        <a href ="/"> click here to go home page</a>
+    </body>
+    
+    </html>

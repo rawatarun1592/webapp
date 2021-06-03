@@ -2,6 +2,7 @@ package com.kakinos.webapp.model;
 
 //import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "patient")
@@ -15,20 +16,20 @@ public class Patient {
   private String gender;
   private String city;
   private int pincode;
-  private String image;
+  private String photos;
 
   public Patient() {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String image) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
     this.gender = gender;
     this.city = city;
     this.pincode = pincode;
-    this.image = image;
+    this.photos = photos;
   }
 
   public String getId() {
@@ -88,19 +89,20 @@ public class Patient {
     this.pincode = pincode;
   }
 
-  public String getImage() {
-    return image;
+  public String getPhotos() {
+    return photos;
   }
 
-  public void setImage(String image) {
-    this.image = image;
+  public void setPhotos(String photos) {
+    this.photos = photos;
   }
-  public String getPhotosImagePath() {
-    if (image == null || id == 0) return null;
-     
-    return "/patient-image/" + id + "/" + image;
-}
-  
+
+  @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
+        // if (photos == null) return null;
+        return "/patient-photos/" + id + "/" + photos;
+    }
 
   // @Override
   // public String toString() {
