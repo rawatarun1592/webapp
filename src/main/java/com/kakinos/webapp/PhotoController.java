@@ -34,7 +34,8 @@ public class PhotoController {
         photoService.addPhoto(title, image, patient.get());
         // ModelAndView modelAndView = new ModelAndView();
         // modelAndView.addObject("id", id);
-        return "redirect:/photos/" + id;
+      //  return "redirect:/photos/" + id;
+      return "submit_image";
     }
 
     @RequestMapping(path = "/photos/{id}")
@@ -43,6 +44,13 @@ public class PhotoController {
         // Photo photo = photoService.getPhoto(id);
         model.addAttribute("title", patient.get().getPhoto().getTitle());
         model.addAttribute("image", Base64.getEncoder().encodeToString(patient.get().getPhoto().getImage().getData()));
-        return "photo";
+        
+        model.addAttribute("firstName", patient.get().getFirstName());
+        model.addAttribute("lastName", patient.get().getLastName());
+        model.addAttribute("age", patient.get().getAge());
+        model.addAttribute("gender", patient.get().getGender());
+        model.addAttribute("city", patient.get().getCity());
+        model.addAttribute("pincode", patient.get().getPincode());
+        return "view";
     }
 }

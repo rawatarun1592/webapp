@@ -1,16 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-      <title>Display Entries</title>
+      <title>Patient Details</title>
   </head>
     <body>
+      <h1 th:text= "${firstName} +' ' + ${lastName} + ' Profile'" ></h1>
+      <img alt="sample" th:src="*{'data:image/png;base64,'+image}" />
         <h3 th:text="'First Name: ' + ${firstName}"></h3>
         <h3 th:text="'Last Name: ' + ${lastName}"></h3>
         <h3 th:text="'Age: ' + ${age}"></h3>
         <h3 th:text="'Gender: ' + ${gender}"></h3>
         <h3 th:text="'City: ' + ${city}"></h3>
         <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
-        <h3 th:text="'Photo: ' + ${photo}"></h3>
-        <h1> Thank You for joining us!!</h1>
+        <a href ="/"> click here to go home page</a>
     </body>
     
     </html>
