@@ -1,19 +1,24 @@
 package com.kakinos.webapp;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.repository.PatientRepository;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @EnableAutoConfiguration
@@ -46,7 +51,7 @@ public class PatientController {
         @RequestParam String gender,
         @RequestParam String city,
         @RequestParam Integer pincode) {
-        patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPincode()));
+        patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPincode(), patient.getImage()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("submitmessage");
         modelAndView.addObject("firstName", firstName);
@@ -123,43 +128,23 @@ public class PatientController {
     @RequestMapping("/delete/{id}")
     public String deletePatient(@PathVariable(name = "id") String id) {
     patientRepository.deleteById(id);
-    return "redirect:/";       
+    return "redirect:/"; 
+    } 
+    
+    @RequestMapping(path = "/patient/save", method=RequestMethod.POST)
+    public RedirectView save(Patient patient, @RequestParam("photo") MultipartFile multipartFile) throws IOException {
+         
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        Patient.setPhoto(fileName);
+         
+        Patient savedPatient = PatientRepository.save(patient);
+ 
+        String uploadDir = "patient-photos/" + savedUser.getId();
+ 
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+         
+        return new RedirectView("/patient", true);
     }
-
-    // public String addPhoto(String title, MultipartFile file) throws IOException { 
-    //     Patient photo = new Patient(title); 
-    //     photo.setImage(
-    //       new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-    //     patient = patientRepository.insert(photo); return photo.getId(); 
-    // }
-
-    // public Patient getPhoto(String id) { 
-    //     return patientRepository.findById(id).get(); 
-    // }
-
-    // @RequestMapping("/photos/add")
-    // public String addPhoto(@RequestParam("title") String title, 
-    // @RequestParam("image") MultipartFile image, Model model) 
-    // throws IOException {
-    //     String id = Service.addPhoto(title, image);
-    // return "redirect:/photos/" + id;
-    // }
-
-    // @RequestMapping("/photos/{id}")
-    // public String getPhoto(@PathVariable String id, Model model) {
-    //     Photo photo = photoService.getPhoto(id);
-    //     model.addAttribute("title", photo.getTitle());
-    //     model.addAttribute("image", 
-    //     Base64.getEncoder().encodeToString(photo.getImage().getData()));
-    //     return "photos";
-    // }
-
-    @RequestMapping(path="/upload_photo", method = RequestMethod.GET)
-    public ModelAndView upload_photo() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("uploadPhoto");
-
-        return modelAndView;
-    }
-       
 }
+         
+

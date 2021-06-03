@@ -1,6 +1,6 @@
 package com.kakinos.webapp.model;
 
-import org.bson.types.Binary;
+//import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,20 +15,20 @@ public class Patient {
   private String gender;
   private String city;
   private int pincode;
-  private Binary image;
+  private String image;
 
   public Patient() {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String image) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
     this.gender = gender;
     this.city = city;
     this.pincode = pincode;
-   // this.image = image;
+    this.image = image;
   }
 
   public String getId() {
@@ -88,14 +88,18 @@ public class Patient {
     this.pincode = pincode;
   }
 
-  public Binary getImage() {
+  public String getImage() {
     return image;
   }
 
-  public void setImage(Binary image) {
+  public void setImage(String image) {
     this.image = image;
   }
-
+  public String getPhotosImagePath() {
+    if (image == null || id == 0) return null;
+     
+    return "/patient-image/" + id + "/" + image;
+}
   
 
   // @Override
