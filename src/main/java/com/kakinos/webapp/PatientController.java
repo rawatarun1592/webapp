@@ -93,13 +93,14 @@ public class PatientController {
         return modelAndView;
     }
 
-    // @RequestMapping(path="/search_patient",method=RequestMethod.GET)
-    // public List<Patient> search_patient(@RequestParam String firstName) 
-    // {
-    //     return patientRepository.findByFirstName(firstName);
-    //    // return patientRepository.findById(id);
-    //     //return patient.get();
-    // }
+    @RequestMapping(path="/view_all_patient",method=RequestMethod.GET)
+    public ModelAndView view_all_patient() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search_result");
+        modelAndView.addObject("patients", patientRepository.findAll());
+        System.out.println("search patient form");
+        return modelAndView;
+    }
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditPatientPage(@PathVariable(name = "id") String id) {
@@ -308,7 +309,6 @@ public class PatientController {
         while ((bytesRead = inputStream.read(buffer)) != -1){
             outputStream.write(buffer, 0, bytesRead);
         }
-   
         inputStream.close();
         outputStream.close();
     }

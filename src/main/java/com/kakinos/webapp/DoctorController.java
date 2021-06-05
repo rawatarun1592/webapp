@@ -70,6 +70,15 @@ public class DoctorController {
 
         return modelAndView;
     }
+
+    @RequestMapping(path="/view_all_doctor",method=RequestMethod.GET)
+    public ModelAndView view_all_doctor() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("");
+        modelAndView.addObject("doctors", doctorRepository.findAll());
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/edit1/{id}")
     public ModelAndView showEditDoctorPage(@PathVariable(name = "id") String id) {
     ModelAndView modelAndView = new ModelAndView();
