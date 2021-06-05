@@ -17,12 +17,13 @@ public class Patient {
   private String city;
   private int pincode;
   private String photos;
+  private String docs;
 
   public Patient() {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos, String docs) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
@@ -30,6 +31,7 @@ public class Patient {
     this.city = city;
     this.pincode = pincode;
     this.photos = photos;
+    this.docs=docs;
   }
 
   public String getId() {
@@ -97,12 +99,27 @@ public class Patient {
     this.photos = photos;
   }
 
+  public String getDocs() {
+    return docs;
+  }
+  public void setDocs(String docs) {
+    this.docs = docs;
+  }
+
   @Transient
     public String getPhotosImagePath() {
         if (photos == null || id == null) return null;
         // if (photos == null) return null;
         return "/patient-photos/" + id + "/" + photos;
     }
+
+    @Transient
+    public String getDocsFilePath() {
+      if (docs == null || id == null) return null;
+      // if (photos == null) return null;
+      return "/patient-docs/" + id + "/" + docs;
+    }
+    //byte[] data = ReportsUtils.generateReport(document).getData();
 
   // @Override
   // public String toString() {

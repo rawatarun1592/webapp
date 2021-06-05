@@ -11,6 +11,25 @@
         <h3 th:text="'Gender: ' + ${gender}"></h3>
         <h3 th:text="'City: ' + ${city}"></h3>
         <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
+        <h3>Documents:</h3><br>
+        <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs}"</h3></a><br><br>
+          <!-- <embed th:src="@{${DocsFilePath}}" /> -->
+        <!-- <table>
+          <thead>
+          <tr>
+            <th>Documents:</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}"></tr>
+        
+        
+        <td><a th:href="@{'/downloads'}"><h3 th:text="${patient.docs}"</h3></a><br><br>
+        </td>
+      </tr>
+    </tbody>
+</table> -->
+        
         <a href ="/"> click here to go home page</a>
     </body>
     
