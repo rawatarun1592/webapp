@@ -74,7 +74,7 @@ public class DoctorController {
     @RequestMapping(path="/view_all_doctor",method=RequestMethod.GET)
     public ModelAndView view_all_doctor() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("");
+        modelAndView.setViewName("view_all_doctor");
         modelAndView.addObject("doctors", doctorRepository.findAll());
         return modelAndView;
     }

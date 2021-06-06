@@ -4,7 +4,7 @@
     <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  -->
     <head>
 <body>
-    <h1> Search result below:</h1>
+    <h1> All Patients </h1>
     <hr>
     <table>
         <thead>
@@ -16,6 +16,8 @@
             <th>Gender</th>
             <th>City</th>
             <th>Pin Code</th>
+            <th>Action</th>
+            <th>Upload Profile Photo</th>
             <th>View Profile</th>
         </tr>
         </thead>
@@ -29,11 +31,21 @@
                 <td th:text="${patient.city}"></td>
                 <td th:text="${patient.pincode}"></td>
                 <td>
-                   <a th:href="@{'/view/' + ${patient.id}}">View Profile</a>
+                    <a th:href="@{'/edit/' + ${patient.id}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/' + ${patient.id}}">Delete</a>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/upload_pic/' + ${patient.id}}">Upload Profile Pic</a>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/view/' + ${patient.id}}">View Profile</a>
                 </td>
             </tr>
             </tbody>
         </table>
-
+        <a href ="/"> click here to go home page</a>
 </body>
 </html>

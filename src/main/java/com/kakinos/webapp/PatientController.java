@@ -96,7 +96,7 @@ public class PatientController {
     @RequestMapping(path="/view_all_patient",method=RequestMethod.GET)
     public ModelAndView view_all_patient() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("search_result");
+        modelAndView.setViewName("view_all_patient");
         modelAndView.addObject("patients", patientRepository.findAll());
         System.out.println("search patient form");
         return modelAndView;
@@ -225,9 +225,9 @@ public class PatientController {
     throws IOException {
         System.out.println("add doc and ty");
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-    Optional<Patient> patientData = patientRepository.findById(id);
-    Patient _patient = patientData.get();
-    System.out.println(_patient.getFirstName());
+        Optional<Patient> patientData = patientRepository.findById(id);
+        Patient _patient = patientData.get();
+        System.out.println(_patient.getFirstName());
         _patient.setDocs(fileName);
 
         System.out.println(_patient.getFirstName()); 
