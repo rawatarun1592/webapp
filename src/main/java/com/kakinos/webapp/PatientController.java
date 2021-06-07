@@ -21,7 +21,9 @@ import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -218,6 +220,7 @@ public class PatientController {
     return modelAndView;
     }
 
+    /*********************upload single file**************/
     // @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
     // public String savePatientdoc(Patient patient,
     // @RequestParam("document") MultipartFile multipartFile,
@@ -267,6 +270,7 @@ public class PatientController {
     //     return "tyfile_message";
     // }
 
+    /*************upload multiple files*****************/
     @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
     public String savePatientdoc(Patient patient,
     @RequestParam("document") MultipartFile[] multipartFiles,
@@ -293,6 +297,7 @@ public class PatientController {
         System.out.println(patient.getFirstName());
 
         List<String> fileNames = new ArrayList<String>();
+       
         for(MultipartFile multipartFile: multipartFiles) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             System.out.println(fileName);
@@ -300,7 +305,12 @@ public class PatientController {
            // _patient.setDocs(fileName);
             fileNames.add(fileName);
         }
-        _patient.setDocs(fileNames);
+        List<String> fileList = _patient.getDocs();
+        for(String name : fileNames) {
+            fileList.add(name);
+        }
+        _patient.setDocs(fileList);
+
         Patient savedPatient = patientRepository.save(_patient);
  
         String uploadDir = "./patient-docs/" + savedPatient.getId();
@@ -338,6 +348,7 @@ public class PatientController {
         return "tyfile_message";
     }
 
+    /**********************view details**********************/
     @RequestMapping(path = "/view/{id}",method=RequestMethod.GET)
     public ModelAndView viewProfile(@ModelAttribute("patient") Patient patient, @PathVariable String id)
         {
@@ -353,25 +364,27 @@ public class PatientController {
         modelAndView.addObject("city", patientData.get().getCity());
         modelAndView.addObject("pincode", patientData.get().getPincode());
         modelAndView.addObject("id", patientData.get().getId());
-        //modelAndView.addObject("DocsFilePath",patientData.get().getDocsFilePath());
         modelAndView.addObject("docs", patientData.get().getDocs());
         System.out.println("final view");
         System.out.println(patient.getId());
          return modelAndView;
         
     }
-@RequestMapping(path = "/downloads/{id}",method=RequestMethod.GET)
-    public void downloadDoc(HttpServletResponse response,@PathVariable String id) 
+
+    /******************************download files*********************/
+    @RequestMapping(path = "/downloads/{id}/{doc}",method=RequestMethod.GET)
+    public void downloadDoc(HttpServletResponse response,@PathVariable String id, @PathVariable String doc) 
     throws Exception{
+       System.out.println(doc);
         Optional<Patient> result = patientRepository.findById(id);
         Patient patient = result.get();
         // String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         // System.out.println(fileName);
-        File file = new File("/workspace/webapp/." + patient.getDocsFilePath() + "Time Sheet Format for BPCLGE.xlsx - Sheet1 (2).pdf");
+        File file = new File("/workspace/webapp/." + patient.getDocsFilePath() + doc);
         // System.out.println("/workspace/webapp/." + patient.getDocsFilePath());
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + patient.getDocs();
+        String headerValue = "attachment; filename=" + doc;
         // System.out.println("/workspace/webapp/." + patient.getDocsFilePath());
         response.setHeader(headerKey,headerValue);
         ServletOutputStream outputStream = response.getOutputStream();
@@ -386,4 +399,5 @@ public class PatientController {
         inputStream.close();
         outputStream.close();
     }
+
 }

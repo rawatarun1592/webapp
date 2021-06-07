@@ -14,10 +14,14 @@
         <h3>Documents:</h3><br>
         <!-- <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs}"></h3></a><br><br> -->
 
-        <c:forEach items="${docs}" var="docs">
+        <!-- <c:forEach items="${docs}" var="docs">
           <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[0]}"></h3></a>
           <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[1]}"></h3></a>
-        </c:each>
+        </c:each> -->
+        
+        <span th:each="doc: ${docs}">
+        <a th:href="@{'/downloads/'+ ${id} + '/' + ${doc}}"><h3 th:text="${doc}"></h3></a>
+        </span>
           <!-- <embed th:src="@{${DocsFilePath}}" />  -->
         <!-- <table>
           <thead>
