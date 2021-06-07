@@ -220,7 +220,6 @@ public class PatientController {
     return modelAndView;
     }
 
-    /*********************upload single file**************/
     // @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
     // public String savePatientdoc(Patient patient,
     // @RequestParam("document") MultipartFile multipartFile,
@@ -270,7 +269,75 @@ public class PatientController {
     //     return "tyfile_message";
     // }
 
-    /*************upload multiple files*****************/
+    // @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
+    // public String savePatientdoc(Patient patient,
+    // @RequestParam("document") MultipartFile[] multipartFiles,
+    // @PathVariable(name = "id") String id,
+    // Model model) 
+    
+    // throws IOException {
+    //     System.out.println("add doc and ty");
+    //     // String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+    //     Optional<Patient> patientData = patientRepository.findById(id);
+    //     Patient _patient = patientData.get();
+    //     System.out.println(_patient.getFirstName());
+    //     // _patient.setDocs(fileName);
+
+    //     System.out.println(_patient.getFirstName()); 
+
+    //     _patient.setFirstName(_patient.getFirstName());
+    //     _patient.setLastName(_patient.getLastName());
+    //     _patient.setAge(_patient.getAge());
+    //     _patient.setGender(_patient.getGender());
+    //     _patient.setCity(_patient.getCity());
+    //     _patient.setPincode(_patient.getPincode());
+    //     _patient.setPhotos(_patient.getPhotosImagePath());
+    //     System.out.println(patient.getFirstName());
+    //     System.out.println("************" + _patient.getDocs());
+    //     List<String> fileNames = _patient.getDocs();
+    //     for(MultipartFile multipartFile: multipartFiles) {
+    //         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+    //         System.out.println("file name:" + fileName);
+    //        // _patient.setDocs(docs);
+    //        // _patient.setDocs(fileName);
+    //         fileNames.add(fileName);
+    //     }
+    //     System.out.println("list" + fileNames);
+    //     String uploadDir = "./patient-docs/" + id;
+    //     Path uploadPath = Paths.get(uploadDir);
+
+    //     _patient.setDocs(fileNames);
+    //      Patient savedPatient = patientRepository.save(_patient);
+ 
+    //     // String uploadDir = "./patient-docs/" + savedPatient.getId();
+    //   //  System.out.println(patient.get().getFirstName());
+    //     // System.out.println(savedPatient.getId());
+    //      System.out.println(savedPatient.getLastName());
+    //     System.out.println("add pic and ty");
+      
+    //     // Path uploadPath = Paths.get(uploadDir);
+    //     System.out.println("file exist" + Files.exists(uploadPath));
+    //     if (!Files.exists(uploadPath)) {
+    //         Files.createDirectories(uploadPath);
+    //     }
+    //     try {
+    //         int count = 0;
+    //         for (String file : fileNames) {
+    //             InputStream inputStream = multipartFiles[count++].getInputStream();
+    //             Path filePath = uploadPath.resolve(file);
+                
+    //         System.out.println(filePath.toFile().getAbsolutePath() );
+    //         Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+    //         }
+    //     }
+    //     catch (IOException ioe) {        
+    //         throw new IOException("Could not save file: " + ioe);
+    //     }
+    //     System.out.println("add doc and ty");
+    //     System.out.println(patient.getId());
+    //     return "tyfile_message";
+    // }
+
     @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
     public String savePatientdoc(Patient patient,
     @RequestParam("document") MultipartFile[] multipartFiles,
@@ -285,8 +352,6 @@ public class PatientController {
         System.out.println(_patient.getFirstName());
         // _patient.setDocs(fileName);
 
-        System.out.println(_patient.getFirstName()); 
-
         _patient.setFirstName(_patient.getFirstName());
         _patient.setLastName(_patient.getLastName());
         _patient.setAge(_patient.getAge());
@@ -294,30 +359,46 @@ public class PatientController {
         _patient.setCity(_patient.getCity());
         _patient.setPincode(_patient.getPincode());
         _patient.setPhotos(_patient.getPhotosImagePath());
-        System.out.println(patient.getFirstName());
 
         List<String> fileNames = new ArrayList<String>();
        
         for(MultipartFile multipartFile: multipartFiles) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             System.out.println(fileName);
-           // _patient.setDocs(docs);
-           // _patient.setDocs(fileName);
             fileNames.add(fileName);
         }
-        List<String> fileList = _patient.getDocs();
-        for(String name : fileNames) {
-            fileList.add(name);
+        
+        
+        System.out.println(fileNames);
+        //fSystem.out.println(_patient.getDocs());
+        // List<String> fileList = _patient.getDocs();
+        // System.out.println(fileList);
+        if(_patient.getDocs() == null) {
+            _patient.setDocs(fileNames);
         }
-        _patient.setDocs(fileList);
-
+        else {
+         for(String name : fileNames) {
+            _patient.getDocs().add(name);
+         }
+        //     fileList.add(name);
+        //     System.out.println("1-1");
+        // }
+        // _patient.setDocs(fileList);
+        // System.out.println(fileList);
+        // System.out.println("1-2");
+        _patient.setDocs(_patient.getDocs());
+        }
         Patient savedPatient = patientRepository.save(_patient);
+            System.out.println(patientRepository.save(_patient));
+       String uploadDir = "./patient-docs/" + savedPatient.getId();
+       System.out.println(uploadDir);
+        // patientRepository.save(_patient);
  
-        String uploadDir = "./patient-docs/" + savedPatient.getId();
+        // String uploadDir = "./patient-docs/" + id;
       //  System.out.println(patient.get().getFirstName());
         // System.out.println(savedPatient.getId());
-         System.out.println(savedPatient.getLastName());
-        System.out.println("add pic and ty");
+     //    System.out.println(savedPatient.getLastName());
+        System.out.println("add doc and ty");
       
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -348,7 +429,6 @@ public class PatientController {
         return "tyfile_message";
     }
 
-    /**********************view details**********************/
     @RequestMapping(path = "/view/{id}",method=RequestMethod.GET)
     public ModelAndView viewProfile(@ModelAttribute("patient") Patient patient, @PathVariable String id)
         {
@@ -370,9 +450,7 @@ public class PatientController {
          return modelAndView;
         
     }
-
-    /******************************download files*********************/
-    @RequestMapping(path = "/downloads/{id}/{doc}",method=RequestMethod.GET)
+@RequestMapping(path = "/downloads/{id}/{doc}",method=RequestMethod.GET)
     public void downloadDoc(HttpServletResponse response,@PathVariable String id, @PathVariable String doc) 
     throws Exception{
        System.out.println(doc);
@@ -398,6 +476,16 @@ public class PatientController {
         }
         inputStream.close();
         outputStream.close();
+    }
+    String folderPath = "/workspace/webapp/patient-docs";
+
+    @RequestMapping("/down/{id}")
+    public void download(@PathVariable String id) throws IOException {
+        File folder = new File(folderPath +"//" +id );
+        File[] listOfFiles = folder.listFiles();
+        System.out.println(listOfFiles.toString());
+        
+       // return "blog/a";
     }
 
 }
