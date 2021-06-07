@@ -1,9 +1,12 @@
 package com.kakinos.webapp.model;
 
+import java.util.List;
+
 //import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 @Document(collection = "patient")
 public class Patient {
@@ -17,13 +20,14 @@ public class Patient {
   private String city;
   private int pincode;
   private String photos;
-  private String docs;
+  //  private String docs;
+  private List<String> docs;
 
   public Patient() {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos, String docs) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos, List<String> docs) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
@@ -99,10 +103,19 @@ public class Patient {
     this.photos = photos;
   }
 
-  public String getDocs() {
+  
+  // public String getDocs() {
+  //   return docs;
+  // }
+  // public void setDocs(String fileNames) {
+  //   this.docs = fileNames;
+  // }
+
+  public List<String> getDocs() {
     return docs;
   }
-  public void setDocs(String docs) {
+
+  public void setDocs(List<String> docs) {
     this.docs = docs;
   }
 
@@ -115,9 +128,9 @@ public class Patient {
 
     @Transient
     public String getDocsFilePath() {
-      if (docs == null || id == null) return null;
+    //  if (doc == null || id == null) return null;
       // if (photos == null) return null;
-      return "/patient-docs/" + id + "/" + docs;
+      return "/patient-docs/" + id + "/";
     }
     //byte[] data = ReportsUtils.generateReport(document).getData();
 

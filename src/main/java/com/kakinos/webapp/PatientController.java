@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -216,19 +218,68 @@ public class PatientController {
     return modelAndView;
     }
 
+    // @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
+    // public String savePatientdoc(Patient patient,
+    // @RequestParam("document") MultipartFile multipartFile,
+    // @PathVariable(name = "id") String id,
+    // Model model) 
+    
+    // throws IOException {
+    //     System.out.println("add doc and ty");
+    //     String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+    //     Optional<Patient> patientData = patientRepository.findById(id);
+    //     Patient _patient = patientData.get();
+    //  //   System.out.println(_patient.getFirstName());
+    //     _patient.setDocs(fileName);
+
+    //     System.out.println(_patient.getFirstName()); 
+
+    //     _patient.setFirstName(_patient.getFirstName());
+    //     _patient.setLastName(_patient.getLastName());
+    //     _patient.setAge(_patient.getAge());
+    //     _patient.setGender(_patient.getGender());
+    //     _patient.setCity(_patient.getCity());
+    //     _patient.setPincode(_patient.getPincode());
+    //     _patient.setPhotos(_patient.getPhotosImagePath());
+    //     System.out.println(patient.getFirstName());
+
+    //     Patient savedPatient = patientRepository.save(_patient);
+ 
+    //     String uploadDir = "./patient-docs/" + savedPatient.getId();
+    //     // System.out.println(patient1.get().getFirstName());
+    //     System.out.println(savedPatient.getId());
+    //     System.out.println(savedPatient.getLastName());
+    //     System.out.println("add pic and ty");
+      
+    //     Path uploadPath = Paths.get(uploadDir);
+    //     if (!Files.exists(uploadPath)) {
+    //         Files.createDirectories(uploadPath);}
+
+    //     try(InputStream inputStream = multipartFile.getInputStream()){
+    //     Path filePath = uploadPath.resolve(fileName);
+    //     System.out.println(filePath.toFile().getAbsolutePath() );
+    //     Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+    //     } catch (IOException ioe) {        
+    //         throw new IOException("Could not save file: " + fileName, ioe);
+    //     }
+    //     System.out.println("add doc and ty");
+    //     System.out.println(patient.getId());
+    //     return "tyfile_message";
+    // }
+
     @RequestMapping(path="/docs/add/{id}",method=RequestMethod.POST)
     public String savePatientdoc(Patient patient,
-    @RequestParam("document") MultipartFile multipartFile,
+    @RequestParam("document") MultipartFile[] multipartFiles,
     @PathVariable(name = "id") String id,
     Model model) 
     
     throws IOException {
         System.out.println("add doc and ty");
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        // String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Optional<Patient> patientData = patientRepository.findById(id);
         Patient _patient = patientData.get();
         System.out.println(_patient.getFirstName());
-        _patient.setDocs(fileName);
+        // _patient.setDocs(fileName);
 
         System.out.println(_patient.getFirstName()); 
 
@@ -241,25 +292,47 @@ public class PatientController {
         _patient.setPhotos(_patient.getPhotosImagePath());
         System.out.println(patient.getFirstName());
 
+        List<String> fileNames = new ArrayList<String>();
+        for(MultipartFile multipartFile: multipartFiles) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            System.out.println(fileName);
+           // _patient.setDocs(docs);
+           // _patient.setDocs(fileName);
+            fileNames.add(fileName);
+        }
+        _patient.setDocs(fileNames);
         Patient savedPatient = patientRepository.save(_patient);
  
         String uploadDir = "./patient-docs/" + savedPatient.getId();
-        // System.out.println(patient1.get().getFirstName());
-        System.out.println(savedPatient.getId());
-        System.out.println(savedPatient.getLastName());
+      //  System.out.println(patient.get().getFirstName());
+        // System.out.println(savedPatient.getId());
+         System.out.println(savedPatient.getLastName());
         System.out.println("add pic and ty");
       
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);}
-
-        try(InputStream inputStream = multipartFile.getInputStream()){
-        Path filePath = uploadPath.resolve(fileName);
-        System.out.println(filePath.toFile().getAbsolutePath() );
-        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ioe) {        
-            throw new IOException("Could not save file: " + fileName, ioe);
+          //  MultipartFile multipartFile = ;
+        try {
+            int count = 0;
+            for (String file : fileNames) {
+                InputStream inputStream = multipartFiles[count++].getInputStream();
+                Path filePath = uploadPath.resolve(file);
+                
+            System.out.println(filePath.toFile().getAbsolutePath() );
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            }
         }
+        catch (IOException ioe) {        
+            throw new IOException("Could not save file: " + ioe);
+        }
+        // try(InputStream inputStream = multipartFiles.getInputStream()){
+        // Path filePath = uploadPath.resolve(fileName);
+        // System.out.println(filePath.toFile().getAbsolutePath() );
+        // Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        // } catch (IOException ioe) {        
+        //     throw new IOException("Could not save file: " + fileName, ioe);
+        // }
         System.out.println("add doc and ty");
         System.out.println(patient.getId());
         return "tyfile_message";
@@ -292,13 +365,14 @@ public class PatientController {
     throws Exception{
         Optional<Patient> result = patientRepository.findById(id);
         Patient patient = result.get();
-       
-        File file = new File("/workspace/webapp/." + patient.getDocsFilePath());
-
+        // String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        // System.out.println(fileName);
+        File file = new File("/workspace/webapp/." + patient.getDocsFilePath() + "Time Sheet Format for BPCLGE.xlsx - Sheet1 (2).pdf");
+        // System.out.println("/workspace/webapp/." + patient.getDocsFilePath());
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + patient.getDocs();
-
+        // System.out.println("/workspace/webapp/." + patient.getDocsFilePath());
         response.setHeader(headerKey,headerValue);
         ServletOutputStream outputStream = response.getOutputStream();
         BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));

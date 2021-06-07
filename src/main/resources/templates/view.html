@@ -12,8 +12,13 @@
         <h3 th:text="'City: ' + ${city}"></h3>
         <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
         <h3>Documents:</h3><br>
-        <a th:href="@{'/downloads/'+ ${id}}"><h3> th:text="${docs}"</h3></a><br><br>
-          <!-- <embed th:src="@{${DocsFilePath}}" /> -->
+        <!-- <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs}"></h3></a><br><br> -->
+
+        <c:forEach items="${docs}" var="docs">
+          <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[0]}"></h3></a>
+          <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[1]}"></h3></a>
+        </c:each>
+          <!-- <embed th:src="@{${DocsFilePath}}" />  -->
         <!-- <table>
           <thead>
           <tr>
@@ -21,14 +26,14 @@
           </tr>
         </thead>
         <tbody>
-        <tr th:each="patient : ${patients}"></tr>
-        
-        
-        <td><a th:href="@{'/downloads'}"><h3 th:text="${patient.docs}"</h3></a><br><br>
+        <tr th:each="docs : ${docs}"></tr>
+        <td><a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[0]}"></h3></a>
         </td>
-      </tr>
-    </tbody>
-</table> -->
+            <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[1]}"></h3></a>
+    
+        </tr>
+        </tbody>
+        </table> -->
         
         <a href ="/"> click here to go home page</a>
     </body>
