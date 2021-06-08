@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.MultipartFile;
 
 @Document(collection = "patient")
 public class Patient {
@@ -133,6 +133,10 @@ public class Patient {
       return "/patient-docs/" + id + "/";
     }
     //byte[] data = ReportsUtils.generateReport(document).getData();
+
+    public Object getTotalPages() {
+        return null;
+    }
 
   // @Override
   // public String toString() {

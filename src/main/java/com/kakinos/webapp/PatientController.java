@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +22,16 @@ import com.kakinos.webapp.model.Patient;
 import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.core.io.Resource;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+//import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -487,5 +492,22 @@ public class PatientController {
         
        // return "blog/a";
     }
+// -------------------------------------------------------------------------------------------------------------
+    @GetMapping("/viewAllpatients/{page}")
+public String patient(@PathVariable("page") Integer page, Model model, Principal principal){
+    model.addAttribute("patient", "show patient details");
+    String patientName = principal.getName();
+    Patient patient = this.patientRepository.getPatientByPatientName(patientName);
+    Pageable pageable = PageRequest.of(page, 10);
 
+Page<Patient> patients = this.patientRepository.findPatientByPatient(patient.getId(), Pageable);
+
+model.addAttribute("patient", patient);
+
+model.addAttribute("currentPage", page);
+model.addAttribute("totalPage", patient.getTotalPages());
+
+return "patient";
+
+}
 }

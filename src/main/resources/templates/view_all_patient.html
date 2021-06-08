@@ -47,5 +47,19 @@
             </tbody>
         </table>
         <a href ="/"> click here to go home page</a>
+<!--------------pagible part-->
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li th:if = "${currentPage != 0" class="page-item"><a th:href="@{'/view/' + ${currentPage-1}}"class="page-link" href="#">Previous</a></li>
+              <li th:classappend="${currentPage == 1-1?'active':''}"th:each= "i: ${numbers.sequence(1, totalPages)}" class="page-item"><a th:href="@{'/view/' + ${i-1}}"class="page-link" href="#"><span th:text="${i}"></span></a></li>
+              <!-- <li th:if="${currentPages+1 != totalPages}"class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+              <li th:if="${currentPages+1 != totalPages}"class="page-item"><a th:href="@{'/view/' + ${currentPage+1}}" class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+
+          <a href ="/"> click here to go home page</a>
+
 </body>
 </html>
