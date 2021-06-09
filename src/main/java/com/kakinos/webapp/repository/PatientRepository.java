@@ -6,19 +6,21 @@ import java.util.Optional;
 
 import com.kakinos.webapp.model.Patient;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.query.Param;
+//import org.springframework.data.repository.query.Param;
+//import org.springframework.data.repository.query.Param;
 
 public interface PatientRepository extends MongoRepository<Patient, String> {
-  List<Patient> findByFirstName(String firstName);
+  Page<Patient> findByFirstName(String firstName, Pageable pageable);
   Optional<Patient> findById(String id);
   List<Patient> findAll();
 
-  public Page<Patient> findPatientsByPatient(@Param("patientId") int patientId, Pageable pageable);
-  
-  Patient getPatientByPatientName(String patientName);
-Page<Patient> findPatientByPatient(String id, Pageable pageable);
+
+//  public Page<Patient> findByPatientID(@Param("patientId") String patientId, Pageable pageable);
+//  Page<Patient> findPatientByPatient(String id, Pageable pageable);
+//  Patient getPatientBypatientName();
+   Patient findByFirstName(String firstName);
 }
 

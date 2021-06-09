@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 
 @Controller
@@ -118,6 +121,20 @@ public class DoctorController {
     public String deleteDoctor(@PathVariable(name = "id") String id) {
     doctorRepository.deleteById(id);
     return "redirect:/";       
+    }
+
+    @RequestMapping(path = "/view_all_doctor/{page}", method = RequestMethod.GET)
+    public ModelAndView view_all_doctor(@PathVariable("page") Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        ModelAndView modelAndView = new ModelAndView();
+        Page<Doctor> doctors = doctorRepository.findAll(pageable);
+        modelAndView.setViewName("view_all_doctor");
+        modelAndView.addObject("patients", doctors.getContent());
+        modelAndView.addObject("currentPage", doctors.getNumber());
+        modelAndView.addObject("totalPage", doctors.getTotalPages());
+        
+
+        return modelAndView;
     }
     
 }
