@@ -129,7 +129,7 @@ public class DoctorController {
         ModelAndView modelAndView = new ModelAndView();
         Page<Doctor> doctors = doctorRepository.findAll(pageable);
         modelAndView.setViewName("view_all_doctor");
-        modelAndView.addObject("patients", doctors.getContent());
+        modelAndView.addObject("doctors", doctors.getContent());
         modelAndView.addObject("currentPage", doctors.getNumber());
         modelAndView.addObject("totalPage", doctors.getTotalPages());
         

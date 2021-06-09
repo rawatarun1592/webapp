@@ -17,10 +17,6 @@ public interface PatientRepository extends MongoRepository<Patient, String> {
   Optional<Patient> findById(String id);
   List<Patient> findAll();
 
-
-//  public Page<Patient> findByPatientID(@Param("patientId") String patientId, Pageable pageable);
-//  Page<Patient> findPatientByPatient(String id, Pageable pageable);
-//  Patient getPatientBypatientName();
    Patient findByFirstName(String firstName);
 }
 
