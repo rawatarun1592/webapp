@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.servlet.ServletOutputStream;
 
 import java.io.BufferedInputStream;
@@ -27,6 +28,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,13 +61,22 @@ public class PatientController {
     }
 
     @RequestMapping(path="/create_new_patient",method=RequestMethod.POST)
-    public ModelAndView create_new_patient(@ModelAttribute("patient") Patient patient, 
+    public ModelAndView create_new_patient(@Valid @ModelAttribute("patient") Patient patient, BindingResult bindingResult,
         @RequestParam String firstName,
         @RequestParam String lastName,
         @RequestParam Integer age,
         @RequestParam String gender,
         @RequestParam String city,
-        @RequestParam Integer pincode) {
+        @RequestParam String pincode) {
+
+        if (bindingResult.hasErrors()) {       
+        
+            System.out.println(bindingResult);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("new_patient");
+            return modelAndView;
+        }
+
         patientRepository.save(new Patient(patient.getFirstName(), patient.getLastName(), patient.getAge(), patient.getGender(), patient.getCity(), patient.getPincode(), patient.getPhotos(), patient.getDocs()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("submitmessage");
@@ -476,16 +487,6 @@ public class PatientController {
         }
         inputStream.close();
         outputStream.close();
-    }
-    String folderPath = "/workspace/webapp/patient-docs";
-
-    @RequestMapping("/down/{id}")
-    public void download(@PathVariable String id) throws IOException {
-        File folder = new File(folderPath +"//" +id );
-        File[] listOfFiles = folder.listFiles();
-        System.out.println(listOfFiles.toString());
-        
-       // return "blog/a";
     }
 
 }

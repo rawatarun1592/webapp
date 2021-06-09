@@ -2,23 +2,44 @@ package com.kakinos.webapp.model;
 
 import java.util.List;
 
-//import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 @Document(collection = "patient")
 public class Patient {
   @Id
   private String id;
 
+  @Size(min = 3, max = 50, message = "firstname must be 3-50 characters long.")
+   @NotBlank
+  // @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Firstname must be 3-50 characters long.")
   private String firstName;
+
+  // @Size(min = 3, max = 50, message = "lastname must be 3-50 characters long.")
+  @NotBlank
+  @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Lastname must be 3-50 characters long")
   private String lastName;
+
+  @NotNull @Min(0) @Max(125)
   private int age;
+
   private String gender;
+
+  // @Size(min = 3, max = 100, message = "Please enter between {min} and {max}")
+  @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "Please enter between {min} and {max}")
   private String city;
-  private int pincode;
+  
+  @Pattern(regexp="^[1-9][0-9]{5}$", message="Pincode is invalid")
+  private String pincode;
+
   private String photos;
   //  private String docs;
   private List<String> docs;
@@ -27,7 +48,7 @@ public class Patient {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos, List<String> docs) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, String pincode, String photos, List<String> docs) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
@@ -87,11 +108,11 @@ public class Patient {
     this.city = city;
   }
 
-  public int getPincode() {
+  public String getPincode() {
     return pincode;
   }
 
-  public void setPincode(int pincode) {
+  public void setPincode(String pincode) {
     this.pincode = pincode;
   }
 

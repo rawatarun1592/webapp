@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
         <title>Patient's Details</title>
@@ -6,9 +7,13 @@
 
 <body>
         <h2> Fill this form: </h2>
-        <form action="create_new_patient" method="post">
+        <form action="#" th:action="@{/create_new_patient}" th:object="${patient}"
+            method="post">
                 First Name : <br><input type="text" name="firstName" /><br><br>
+                <!-- <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span> -->
+                pattern="^[A-Za-z]{2,50}$" title="Three letter country code"><br><br>
                 Last Name : <br><input type="text" name="lastName" /><br><br>
+                pattern="^[A-Za-z]{2,50}$" title="Three letter country code..."><br><br>
                 Age : <br><input type="text" name="age" /><br><br>
                 Gender : <br>
                 Male <input type="radio" id="male" name="gender" value="male">
