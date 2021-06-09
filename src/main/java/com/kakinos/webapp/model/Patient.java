@@ -18,19 +18,20 @@ public class Patient {
   @Id
   private String id;
 
-  @Size(min = 3, max = 50, message = "firstname must be 3-50 characters long.")
-   @NotBlank
-  // @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Firstname must be 3-50 characters long.")
+  // @Size(min = 3, max = 50, message = "firstname must be 3-50 characters long.")
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$" , message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String firstName;
 
   // @Size(min = 3, max = 50, message = "lastname must be 3-50 characters long.")
   @NotBlank
-  @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Lastname must be 3-50 characters long")
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$",message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String lastName;
 
   @NotNull @Min(0) @Max(125)
   private int age;
 
+  @NotBlank
   private String gender;
 
   // @Size(min = 3, max = 100, message = "Please enter between {min} and {max}")

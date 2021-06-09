@@ -12,18 +12,21 @@ public class Doctor {
   private String id;
 
   @NotBlank
-  @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Firstname must be 3-50 characters long.")
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$" , message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String firstName;
 
   @NotBlank
-  @Pattern(regexp = "^[A-Za-z]{3,50}$",message = "special character and digit not allowed, Lastname must be 3-50 characters long")
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$",message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String lastName;
 
+  @NotBlank
   private String specialization;
 
   @Pattern(regexp="^[1-9][0-9]{9}$", message="Mobile number is invalid")
   private String phoneNumber;
 
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9,'.]{10,2000}$",message = "Address must be min 10 and max 2000 chars long. only alphabets, numbers, comma, dot, apostrophe characters are allowed")
   private String address;
 
   @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "Please enter between {min} and {max}")
