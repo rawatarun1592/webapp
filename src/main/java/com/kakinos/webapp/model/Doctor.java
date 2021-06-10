@@ -20,6 +20,7 @@ public class Doctor {
   private String lastName;
 
   @NotBlank
+  @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "only alphabets are allowed")
   private String specialization;
 
   @Pattern(regexp="^[1-9][0-9]{9}$", message="Mobile number is invalid")

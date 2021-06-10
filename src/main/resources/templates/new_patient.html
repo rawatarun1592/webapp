@@ -9,7 +9,7 @@
         <h2> Fill this form: </h2>
         <form action="#" th:action="@{/create_new_patient}" th:object="${patient}"
             method="post">
-                First Name : <br><input type="text" name="firstName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required/><br><br>
+                First Name : <br><input type="text" name="firstName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
                 <!-- <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span> -->
                 <!-- pattern="^[A-Za-z]{2,50}$" title="Three letter country code"><br><br> -->
                 Last Name : <br><input type="text" name="lastName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>

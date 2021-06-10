@@ -7,13 +7,13 @@
 <body>
         <h2> Fill this form: </h2>
         <form action="create_new_doctor" method="post">
-                First Name : <br><input type="text" name="firstName" /><br><br>
-                Last Name : <br><input type="text" name="lastName" /><br><br>
-                Specialization : <br><input type="text" name="specialization" /><br><br>
-                PhoneNumber : <br><input type="text" name="phoneNumber" /><br><br>
-                Address: <br><input type="text" name="address" /><br><br>
-                City : <br><input type="text" name="city" /><br><br>
-                Pincode : <br><input type="text" name="pincode" /><br><br><br>
+                First Name : <br><input type="text" name="firstName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
+                Last Name : <br><input type="text" name="lastName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
+                Specialization : <br><input type="text" name="specialization" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed"  /><br><br>
+                PhoneNumber : <br><input type="text" name="phoneNumber" pattern="^[1-9][0-9]{9}$" maxlength="10" title="Invalid number" required/><br><br>
+                Address: <br><input type="text" name="address" pattern="^[A-Za-z]{10,2000}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required/><br><br>
+                City : <br><input type="text" name="city" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed" required /><br><br>
+                Pincode : <br><input type="text" name="pincode" pattern="^[1-9][0-9]{5}$" maxlength="6" title="pincode should be exact 6 digit" required /><br><br><br>
 
                 <button type="submit">Submit</button>
 
