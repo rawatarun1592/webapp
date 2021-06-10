@@ -21,36 +21,36 @@
                 <tr>             
                     <td>First Name:</td>
                     <td>
-                        <input type="text" th:field="*{firstName}"  />
+                        <input type="text" th:field="*{firstName}" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required />
                     </td>
                 </tr>        
                 <tr>             
                     <td>Last Name:</td>
                     <td>
-                        <input type="text" th:field="*{lastName}" />
+                        <input type="text" th:field="*{lastName}" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Specialization:</td>
                     <td>
-                        <input type="text" th:field="*{specialization}" />
+                        <input type="text" th:field="*{specialization}" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed" required />
                     </td>
                 </tr>
                 <tr>
                     <td>Phone Number:</td>
-                    <td><input type="text" th:field="*{phoneNumber}" /></td>
+                    <td><input type="text" th:field="*{phoneNumber}" pattern="^[1-9][0-9]{9}$" maxlength="10" title="Invalid number" required/></td>
                 </tr>
                 <tr>
                     <td>Address:</td>
-                    <td><input type="text" th:field="*{address}" /></td>
+                    <td><input type="text" th:field="*{address}" pattern="^[a-zA-Z0-9,'.]{10,2000}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /></td>
                 </tr>
                 <tr>
                     <td>City:</td>
-                    <td><input type="text" th:field="*{city}" /></td>
+                    <td><input type="text" th:field="*{city}" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed" required/></td>
                 </tr> 
 				<tr>
                     <td>Pincode:</td>
-                    <td><input type="text" th:field="*{pincode}" /></td>
+                    <td><input type="text" th:field="*{pincode}" pattern="^[1-9][0-9]{5}$" maxlength="6" title="pincode should be exact 6 digit" required /></td>
                 </tr>				
                 <tr>
                     <td colspan="2"><button type="submit">Save</button> </td>
