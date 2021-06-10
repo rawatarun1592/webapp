@@ -487,7 +487,7 @@ public class PatientController {
    
     @RequestMapping(path = "/view_all_patient/{page}", method = RequestMethod.GET)
     public ModelAndView view_all_patient(@PathVariable("page") Integer page) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, 15);
         ModelAndView modelAndView = new ModelAndView();
         Page<Patient> patients = patientRepository.findAll(pageable);
         modelAndView.setViewName("view_all_patient");
