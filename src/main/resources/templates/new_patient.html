@@ -7,12 +7,12 @@
 
 <body>
         <h2> Fill this form: </h2>
-        <form action="#" th:action="@{/create_new_patient}" th:object="${patient}"
+        <form action="#" th:action="@{/create_new_patient}" th:object="${patient}"  
             method="post">
-                First Name : <br><input type="text" name="firstName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
+                First Name : <br><input type="text" name="firstName" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
                 <!-- <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span> -->
                 <!-- pattern="^[A-Za-z]{2,50}$" title="Three letter country code"><br><br> -->
-                Last Name : <br><input type="text" name="lastName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
+                Last Name : <br><input type="text" name="lastName" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
                 <!-- pattern="^[A-Za-z]{2,50}$" title="Three letter country code..."><br><br> -->
                 Age : <br><input type="text" name="age" pattern="(0?[1-9]|[1-9][0-9]|[1][0-1][0-9]|120|121|122|123|124|125)" title="age should be between 0-125" required /><br><br>
                 Gender : <br>
