@@ -9,12 +9,12 @@
         <h2> Fill this form: </h2>
         <form action="#" th:action="@{/create_new_patient}" th:object="${patient}"
             method="post">
-                First Name : <br><input type="text" name="firstName" /><br><br>
+                First Name : <br><input type="text" name="firstName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required/><br><br>
                 <!-- <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span> -->
-                pattern="^[A-Za-z]{2,50}$" title="Three letter country code"><br><br>
-                Last Name : <br><input type="text" name="lastName" /><br><br>
-                pattern="^[A-Za-z]{2,50}$" title="Three letter country code..."><br><br>
-                Age : <br><input type="text" name="age" /><br><br>
+                <!-- pattern="^[A-Za-z]{2,50}$" title="Three letter country code"><br><br> -->
+                Last Name : <br><input type="text" name="lastName" pattern="^[A-Za-z]{2,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required /><br><br>
+                <!-- pattern="^[A-Za-z]{2,50}$" title="Three letter country code..."><br><br> -->
+                Age : <br><input type="text" name="age" pattern="(0?[1-9]|[1-9][0-9]|[1][0-1][0-9]|120|121|122|123|124|125)" title="age should be between 0-125" required /><br><br>
                 Gender : <br>
                 Male <input type="radio" id="male" name="gender" value="male">
 
@@ -22,8 +22,8 @@
                 Other <input type="radio" id="other" name="gender" value="other">
                 <br><br>
 
-                City : <br><input type="text" name="city" /><br><br>
-                Pincode : <br><input type="text" name="pincode" /><br><br><br>
+                City : <br><input type="text" name="city" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed" required/><br><br>
+                Pincode : <br><input type="text" name="pincode" pattern="^[1-9][0-9]{5}$" maxlength="6" title="pincode should be exact 6 digit" required /><br><br><br>
 
                 <button type="submit">Submit</button>
 
