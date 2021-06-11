@@ -153,7 +153,7 @@ public class PatientController {
     @RequestMapping("/delete/{id}")
     public String deletePatient(@PathVariable(name = "id") String id) {
     patientRepository.deleteById(id);
-    return "redirect:/"; 
+    return "redirect:/view_all_patient"; 
     } 
     
     @RequestMapping(path="/upload_pic/{id}",method = RequestMethod.GET)

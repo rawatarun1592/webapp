@@ -129,7 +129,7 @@ public class DoctorController {
     @RequestMapping(value = "/delete1/{id}")
     public String deleteDoctor(@PathVariable(name = "id") String id) {
     doctorRepository.deleteById(id);
-    return "redirect:/";       
+    return "redirect:/view_all_doctor";       
     }
     
 }
