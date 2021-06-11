@@ -1,62 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<!-- <meta charset="utf-8" /> -->
-<title>Edit Doctor</title>
-</head>
-<body>
-    <div align="center">
-        <h1>Edit Doctor</h1>
-        <br />
-        <form action="#" th:action="@{'/update1/' + ${id}}" th:object="${doctor}"
-            method="post">
- 
-            <table border="0" cellpadding="10">
-                <tr>             
-                    <td> ID:</td>
-                    <td>
-                        <input type="text" th:field="*{id}" readonly="readonly" />
-                    </td>
-                </tr> 
-                <tr>             
-                    <td>First Name:</td>
-                    <td>
-                        <input type="text" th:field="*{firstName}"  />
-                    </td>
-                </tr>        
-                <tr>             
-                    <td>Last Name:</td>
-                    <td>
-                        <input type="text" th:field="*{lastName}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Specialization:</td>
-                    <td>
-                        <input type="text" th:field="*{specialization}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Phone Number:</td>
-                    <td><input type="text" th:field="*{phoneNumber}" /></td>
-                </tr>
-                <tr>
-                    <td>Address:</td>
-                    <td><input type="text" th:field="*{address}" /></td>
-                </tr>
-                <tr>
-                    <td>City:</td>
-                    <td><input type="text" th:field="*{city}" /></td>
-                </tr> 
-				<tr>
-                    <td>Pincode:</td>
-                    <td><input type="text" th:field="*{pincode}" /></td>
-                </tr>				
-                <tr>
-                    <td colspan="2"><button type="submit">Save</button> </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</body>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title>Home Page</title>
+                <link rel="stylesheet" type="text/css" href="/css/style.css">
+        </head>
+        <body>
+        <div class="full-page">
+                <div class=navbar1>
+                        <a href="/">Healthcare<br> WebApp</a>
+                </div>
+                <div id="new-doctor"class="login-page">
+                        <div class="form-box">
+                                <div class="button-box">
+                                        <div id='btn'></div>
+                                        <div type="text" class="txt">Edit your details</div>
+                                </div>
+                                <form id='login'action="#" th:action="@{'/update1/' + ${id}}" th:object="${doctor}"method="post"class="input-group-login">
+                                        <input type="text" name="id"th:field="*{id}" readonly="readonly" class="input-field1">
+                                        <input type="text" name="firstName"th:field="*{firstName}" required class="input-field1">
+                                        <input type="text" name="lastName"th:field="*{lastName}" required class="input-field1">
+                                        <input type="text" name="specialization"th:field="*{specialization}" required class="input-field1">
+                                        <input type="text" name="phoneNumber"th:field="*{phoneNumber}" required class="input-field1">
+                                        <input type="text" name="address"th:field="*{address}" required class="input-field1">
+                                        <input type="text" name="city"th:field="*{city}" required class="input-field1">
+                                        <input type="text" name="pincode"th:field="*{pincode}" required class="input-field1">
+                                        <button type ="submit" class="submit-btn">Submit</button>
+                                </form>
+                        </div>
+                </div>
+        </div>
+        </body>
 </html>

@@ -1,19 +1,29 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
 <body>
-    <h1>Patient details</h1>
-    <a href ="/new_patient">Create new patient</a>
-    <br/>
-    <a href ="/search_patient_form"> Search a patient</a>
-    <br/>
-    <a href ="/view_all_patient"> View all patients</a>
-    <hr>
-     <h1>Doctor details</h1>
-    <a href ="/new_doctor"> Create new doctor</a>
-    <br/>
-    <a href ="/search_doctor_form"> Search a doctor</a>
-    <br/>
-    <a href ="/view_all_doctor"> View all doctors</a>
+    <div class="full-page">
+        <div class="navbar">
+            <div>
+                <a href="/">Healthcare<br> WebApp</a>
+            </div>
+            <nav>
+                <ul id='MenuItems'>
+                    <li><a href="/new_patient">New Patient</a></li>
+                    <li><a href="/search_patient_form">Search Patient</a></li>
+                    <li><a href="/view_all_patient">View Patient</a></li>
+                    <li><a href="/new_doctor">New Doctor</a></li>
+                    <li><a href="/search_doctor_form">Search Doctor</a></li>
+                    <li><a href="/view_all_doctor">View Doctor</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
 </body>
 
 </html>

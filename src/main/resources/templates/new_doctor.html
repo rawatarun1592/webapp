@@ -1,24 +1,34 @@
-<html>
-
-<head>
-        <title>Doctor's Details</title>
-</head>
-
-<body>
-        <h2> Fill this form: </h2>
-        <form action="create_new_doctor" method="post">
-                First Name : <br><input type="text" name="firstName" /><br><br>
-                Last Name : <br><input type="text" name="lastName" /><br><br>
-                Specialization : <br><input type="text" name="specialization" /><br><br>
-                PhoneNumber : <br><input type="text" name="phoneNumber" /><br><br>
-                Address: <br><input type="text" name="address" /><br><br>
-                City : <br><input type="text" name="city" /><br><br>
-                Pincode : <br><input type="text" name="pincode" /><br><br><br>
-
-                <button type="submit">Submit</button>
-
-        </form>
-
-</body>
-
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title>Home Page</title>
+                <link rel="stylesheet" type="text/css" href="/css/style.css">
+        </head>
+        <body>
+        <div class="full-page">
+                <div class=navbar1>
+                        <a href="/">Healthcare<br> WebApp</a>
+                </div>
+                <div id="new-doctor"class="login-page">
+                        <div class="form-box">
+                                <div class="button-box">
+                                        <div id='btn'></div>
+                                        <div type="text" class="txt">Enter details below</div>
+                                </div>
+                                <form id='login'action="create_new_doctor" method="post"class="input-group-login">
+                                        <input type="text" name="firstName"placeholder='First Name' required class="input-field">
+                                        <input type="text" name="lastName"placeholder='Last Name' required class="input-field">
+                                        <input type="text" name="specialization"placeholder='Specialization' required class="input-field">
+                                        <input type="text" name="phoneNumber"placeholder='Phone Number' required class="input-field">
+                                        <input type="text" name="address"placeholder='Address' required class="input-field">
+                                        <input type="text" name="city"placeholder='City' required class="input-field">
+                                        <input type="text" name="pincode"placeholder='Area Pincode' required class="input-field">
+                                        <button type ="submit" class="submit-btn">Submit</button>
+                                </form>
+                        </div>
+                </div>
+        </div>
+        </body>
 </html>
+        

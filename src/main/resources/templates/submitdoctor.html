@@ -1,17 +1,35 @@
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-      <title>Display Doctor Entries</title>
-  </head>
-    <body>
-        <h3 th:text="'First Name: ' + ${firstName}"></h3>
-        <h3 th:text="'Last Name: ' + ${lastName}"></h3>
-        <h3 th:text="'Specialization: ' + ${specialization}"></h3>
-        <h3 th:text="'Phone Number: ' + ${phoneNumber}"></h3>
-        <h3 th:text="'Address: ' + ${address}"></h3>
-        <h3 th:text="'City: ' + ${city}"></h3>
-        <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
-        <h1> Thank You for joining us!!</h1>
-        <a href ="/"> click here to go home page</a>
-    </body>
-
-    </html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title>Home Page</title>
+                <link rel="stylesheet" type="text/css" href="/css/style.css">
+        </head>
+        <body>
+              <div class="full-page">
+                      <div class=navbar1>
+                              <a href="/">Healthcare<br> WebApp</a>
+                      </div>
+                      <div id="search-d-result"class="search-d-result-page">
+                              <div class="display-box">
+                                      <div class="button-box">
+                                              <div id='btn'></div>
+                                              <div type="text" class="txt">Please find your details below</div>
+                                      </div>
+                                      <nav2>
+                                        <ul id='DisplayItems'>
+                                            <li th:text="'First Name: ' + ${firstName}"></li>
+                                            <li th:text="'Last Name: ' + ${lastName}"></li>
+                                            <li th:text="'Specialization: ' + ${specialization}"></li>
+                                            <li th:text="'Phone Number: ' + ${phoneNumber}"></li>
+                                            <li th:text="'Address: ' + ${address}"></li>
+                                            <li th:text="'City: ' + ${city}"></li>
+                                            <li th:text="'Pin Code: ' + ${pincode}"></li>
+                                        </ul>
+                                      </nav2>
+                                      <div type="text" class="txt1">Thank You for joining us!!</div>
+                              </div>
+                      </div>
+              </div>
+          </body>
+</html>
