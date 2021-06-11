@@ -299,7 +299,7 @@ public class PatientController {
         _patient.setGender(_patient.getGender());
         _patient.setCity(_patient.getCity());
         _patient.setPincode(_patient.getPincode());
-        _patient.setPhotos(_patient.getPhotosImagePath());
+        _patient.setPhotos(_patient.getPhotos());
 
         List<String> fileNames = new ArrayList<String>();
        
@@ -308,8 +308,7 @@ public class PatientController {
             System.out.println(fileName);
             fileNames.add(fileName);
         }
-        
-        
+         
         System.out.println(fileNames);
         if(_patient.getDocs() == null) {
             _patient.setDocs(fileNames);
@@ -374,7 +373,7 @@ public class PatientController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("view");
         modelAndView.addObject("PhotosImagePath",patientData.get().getPhotosImagePath());
-        modelAndView.addObject("photos", patientData.get().getPhotosImagePath());
+        modelAndView.addObject("photos", patientData.get().getPhotos());
         modelAndView.addObject("firstName", patientData.get().getFirstName());
         modelAndView.addObject("lastName",patientData.get().getLastName());
         modelAndView.addObject("age", patientData.get().getAge());

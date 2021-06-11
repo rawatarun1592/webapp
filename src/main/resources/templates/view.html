@@ -1,45 +1,57 @@
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-      <title>Patient Details</title>
-  </head>
-    <body>
-      <h1 th:text= "${firstName} +' ' + ${lastName} + ' Profile'" ></h1>
-      <img th:src="@{${PhotosImagePath}}" />
-        <h3 th:text="'First Name: ' + ${firstName}"></h3>
-        <h3 th:text="'Last Name: ' + ${lastName}"></h3>
-        <h3 th:text="'Age: ' + ${age}"></h3>
-        <h3 th:text="'Gender: ' + ${gender}"></h3>
-        <h3 th:text="'City: ' + ${city}"></h3>
-        <h3 th:text="'Pin Code: ' + ${pincode}"></h3>
-        <h3>Documents:</h3><br>
-        <!-- <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs}"></h3></a><br><br> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title>Home Page</title>
+                <link rel="stylesheet" type="text/css" href="/css/style.css">
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        </head>
+        <body>
+                <div class="full-page">
+                        <div class=navbar1>
+                                <a href="/">Healthcare<br> WebApp</a>
+                        </div>
+                        <div id="search-d-result"class="view-page">
+                                <div class="display-box1">
+                                        <div class="button-box1">
+                                                <div id='btn'></div>
+                                                <div type="text" class="txt" th:text= "${firstName} +' ' + ${lastName} + 's Profile'"></div>
+                                        </div>
+                                        <div class="images"><img th:src="@{${PhotosImagePath}}"class="pic"alt="Profile picture not found"></div>
+                                        <nav2>
+                                                <ul id='DisplayItems'>
 
-        <!-- <c:forEach items="${docs}" var="docs">
-          <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[0]}"></h3></a>
-          <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[1]}"></h3></a>
-        </c:each> -->
-        
-        <span th:each="doc: ${docs}">
-        <a th:href="@{'/downloads/'+ ${id} + '/' + ${doc}}"><h3 th:text="${doc}"></h3></a>
-        </span>
-          <!-- <embed th:src="@{${DocsFilePath}}" />  -->
-        <!-- <table>
-          <thead>
-          <tr>
-            <th>Documents:</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr th:each="docs : ${docs}"></tr>
-        <td><a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[0]}"></h3></a>
-        </td>
-            <a th:href="@{'/downloads/'+ ${id}}"><h3 th:text="${docs[1]}"></h3></a>
-    
-        </tr>
-        </tbody>
-        </table> -->
-        
-        <a href ="/"> click here to go home page</a>
-    </body>
-    
-    </html>
+                                                        <li th:text="'Name: ' + ${firstName} + ' '+${lastName}"></li>
+                                                        <li th:text="'Age: ' + ${age}"></li>
+                                                        <li th:text="'Gender: ' + ${gender}"></li>
+                                                        <li th:text="'Address: ' + ${city} + ' - ' + ${pincode}"></li>
+                                                </ul>
+                                        </nav2>
+
+                                </div>
+                                <div class="display-box1">
+                                        <div class="button-box1">
+                                                <div id='btn'></div>
+                                                <div type="text" class="txt" th:text= "${firstName} +' ' + ${lastName} + 's Medical Record'"></div>
+                                        </div>
+                                        <div th:each="doc: ${docs}">
+                                                <nav2>
+                                                        <ul>
+                                                                
+                                                                <li><i class="material-icons"style="vertical-align:middle">article</i><a th:href="@{'/downloads/'+ ${id} + '/' + ${doc}}" th:text="' '+ ${doc}"></a></li>
+                                                        </ul>
+                      
+                                                        
+                                                </nav2>
+                                                
+                                        </div>
+                                        <div>
+                                          <a th:href="@{'/docs/' + ${patient.id}}"><i class="material-icons" id="style-doc">note_add</i></a> </div> 
+                                          <div class="rand-txt">Click on the above icon to upload relevant documents</div>
+                                        
+                                </div>
+                        </div>
+                </div>
+
+        </body>
+</html>  
