@@ -1,5 +1,8 @@
 package com.kakinos.webapp.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,19 +11,36 @@ public class Doctor {
   @Id
   private String id;
 
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$" , message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String firstName;
+
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$",message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String lastName;
+
+  @NotBlank
+  @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "only alphabets are allowed")
   private String specialization;
+
+  @Pattern(regexp="^[1-9][0-9]{9}$", message="Mobile number is invalid")
   private String phoneNumber;
+
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9,'.]{10,2000}$",message = "Address must be min 10 and max 2000 chars long. only alphabets, numbers, comma, dot, apostrophe characters are allowed")
   private String address;
+
+  @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "Please enter between {min} and {max}")
   private String city;
-  private int pincode;
+
+  @Pattern(regexp="^[1-9][0-9]{5}$", message="Pincode is invalid")
+  private String pincode;
 
   public Doctor() {
 
   }
 
-  public Doctor(String firstName, String lastName, String specialization, String phoneNumber, String address, String city, int pincode) {
+  public Doctor(String firstName, String lastName, String specialization, String phoneNumber, String address, String city, String pincode) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.specialization = specialization;
@@ -86,13 +106,14 @@ public class Doctor {
     this.city = city;
   }
 
-  public int getPincode() {
+  public String getPincode() {
     return pincode;
   }
 
-  public void setPincode(int pincode) {
+  public void setPincode(String pincode) {
     this.pincode = pincode;
   }
-
   
 }
+
+

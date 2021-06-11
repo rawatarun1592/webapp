@@ -18,9 +18,9 @@
                                 </div>
                                 <form id='login'action="#" th:action="@{'/update/' + ${id}}" th:object="${patient}"method="post"class="input-group-login">
                                         <input type="text" name="id"th:field="*{id}" readonly="readonly" required class="input-field1">
-                                        <input type="text" name="firstName"th:field="*{firstName}" required class="input-field1">
-                                        <input type="text" name="lastName"th:field="*{lastName}" required class="input-field1">
-                                        <input type="text" name="age"th:field="*{age}" required class="input-field1">
+                                        <input type="text" name="firstName"th:field="*{firstName}" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required class="input-field1">
+                                        <input type="text" name="lastName"th:field="*{lastName}" pattern="^[a-zA-Z0-9'.]{3,50}$" title="only alphabets, numbers, apostrophe, dot characters are allowed." required class="input-field1">
+                                        <input type="text" name="age"th:field="*{age}" pattern="(0?[1-9]|[1-9][0-9]|[1][0-1][0-9]|120|121|122|123|124|125)" required class="input-field1">
                                         <input type="text" list="genders" name="gender"th:field="*{gender}" required class="input-field1">
                                         <datalist id="genders">
                                                 <option value="Male">
@@ -28,8 +28,8 @@
                                                 <option value="Others">
                                                 <option value="Prefer not to say">
                                         </datalist>
-                                        <input type="text" name="city"th:field="*{city}" required class="input-field1">
-                                        <input type="text" name="pincode"th:field="*{pincode}" required class="input-field1">
+                                        <input type="text" name="city"th:field="*{city}" pattern="^[A-Za-z]{3,100}$" title="Only alphabets are allowed" required class="input-field1">
+                                        <input type="text" name="pincode"th:field="*{pincode}" pattern="^[1-9][0-9]{5}$" maxlength="6" title="pincode should be exact 6 digit" required class="input-field1">
                                         <button type ="submit" class="submit-btn">Submit</button>
                                 </form>
                         </div>

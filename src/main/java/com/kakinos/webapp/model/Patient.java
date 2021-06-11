@@ -2,23 +2,42 @@ package com.kakinos.webapp.model;
 
 import java.util.List;
 
-//import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 @Document(collection = "patient")
 public class Patient {
   @Id
   private String id;
 
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$" , message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String firstName;
+
+  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9'.]{3,50}$",message = "only alphabets, numbers, apostrophe, dot characters are allowed, Firstname must be 3-50 characters long")
   private String lastName;
+
+  @NotNull @Min(0) @Max(125)
   private int age;
+
+  @NotBlank
   private String gender;
+
+  @Pattern(regexp = "^[A-Za-z]{3,100}$", message = "Please enter between {min} and {max}")
   private String city;
-  private int pincode;
+  
+  @Pattern(regexp="^[1-9][0-9]{5}$", message="Pincode is invalid")
+  private String pincode;
+
   private String photos;
   //  private String docs;
   private List<String> docs;
@@ -27,7 +46,7 @@ public class Patient {
 
   }
 
-  public Patient(String firstName, String lastName, int age, String gender, String city, int pincode, String photos, List<String> docs) {
+  public Patient(String firstName, String lastName, int age, String gender, String city, String pincode, String photos, List<String> docs) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
@@ -87,11 +106,11 @@ public class Patient {
     this.city = city;
   }
 
-  public int getPincode() {
+  public String getPincode() {
     return pincode;
   }
 
-  public void setPincode(int pincode) {
+  public void setPincode(String pincode) {
     this.pincode = pincode;
   }
 
@@ -128,14 +147,6 @@ public class Patient {
 
     @Transient
     public String getDocsFilePath() {
-    //  if (doc == null || id == null) return null;
-      // if (photos == null) return null;
       return "/patient-docs/" + id + "/";
     }
-    //byte[] data = ReportsUtils.generateReport(document).getData();
-
-  // @Override
-  // public String toString() {
-  //   return "Patient [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", age="  + age + ", gender=" + gender + ", city="  + city + ", pincode=" + pincode + "]";
-  // }
 }

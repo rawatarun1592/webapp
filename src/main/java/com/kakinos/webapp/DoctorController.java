@@ -2,12 +2,15 @@ package com.kakinos.webapp;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.kakinos.webapp.model.Doctor;
 import com.kakinos.webapp.repository.DoctorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +35,7 @@ public class DoctorController {
     }
 
     @RequestMapping(path="/create_new_doctor",method=RequestMethod.POST)
-    public ModelAndView create_new_doctor(@ModelAttribute("doctor") Doctor doctor,
+    public ModelAndView create_new_doctor(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult bindingResult,
         @RequestParam String firstName,
         @RequestParam String lastName,
         @RequestParam String specialization,
@@ -40,6 +43,15 @@ public class DoctorController {
         @RequestParam String address,
         @RequestParam String city,
         @RequestParam Integer pincode) {
+
+            if (bindingResult.hasErrors()) {       
+        
+                System.out.println(bindingResult);
+                ModelAndView modelAndView = new ModelAndView();
+                modelAndView.setViewName("new_doctor");
+                return modelAndView;
+            }
+
         doctorRepository.save(new Doctor(doctor.getFirstName(), doctor.getLastName(), doctor.getSpecialization(), doctor.getPhoneNumber(), doctor.getAddress(), doctor.getCity(), doctor.getPincode()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("submitdoctor");
@@ -66,7 +78,6 @@ public class DoctorController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search_doctor_result");
         modelAndView.addObject("doctors", doctorRepository.findBySpecializationAndCity(specialization, city));
-        //modelAndView.addObject("doctors", doctorRepository.getByCity(city));
 
         return modelAndView;
     }
@@ -83,11 +94,12 @@ public class DoctorController {
     public ModelAndView showEditDoctorPage(@PathVariable(name = "id") String id) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("edit_doctor");
-    // Patient patient = patientRepository.get(id);
     modelAndView.addObject("doctor", doctorRepository.findById(id));
     modelAndView.addObject("id", id);
+
     return modelAndView;
     }
+
     @RequestMapping(value ="/update1/{id}",method=RequestMethod.POST)
     public ModelAndView updatePatient(@ModelAttribute("doctor") Doctor doctor, @PathVariable String id)
         {
@@ -111,9 +123,9 @@ public class DoctorController {
         modelAndView.addObject("city", _doctor.getCity());
         modelAndView.addObject("pincode", _doctor.getPincode());
     
-        return modelAndView;
-        
+        return modelAndView;  
     }
+    
     @RequestMapping(value = "/delete1/{id}")
     public String deleteDoctor(@PathVariable(name = "id") String id) {
     doctorRepository.deleteById(id);
