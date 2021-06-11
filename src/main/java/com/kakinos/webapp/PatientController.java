@@ -23,6 +23,9 @@ import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -106,12 +109,25 @@ public class PatientController {
         return modelAndView;
     }
 
-    @RequestMapping(path="/view_all_patient",method=RequestMethod.GET)
-    public ModelAndView view_all_patient() {
+    // @RequestMapping(path="/view_all_patient",method=RequestMethod.GET)
+    // public ModelAndView view_all_patient() {
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     modelAndView.setViewName("view_all_patient");
+    //     modelAndView.addObject("patients", patientRepository.findAll());
+    //     System.out.println("search patient form");
+    //     return modelAndView;
+    // }
+
+    @RequestMapping(path = "/view_all_patient/{page}", method = RequestMethod.GET)
+    public ModelAndView view_all_patient(@PathVariable("page") Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         ModelAndView modelAndView = new ModelAndView();
+        Page<Patient> patients = patientRepository.findAll(pageable);
         modelAndView.setViewName("view_all_patient");
-        modelAndView.addObject("patients", patientRepository.findAll());
-        System.out.println("search patient form");
+        modelAndView.addObject("patients", patients.getContent());
+        modelAndView.addObject("currentPage", patients.getNumber());
+        modelAndView.addObject("totalPage", patients.getTotalPages());  
+
         return modelAndView;
     }
 
