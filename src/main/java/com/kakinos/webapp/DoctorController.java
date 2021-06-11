@@ -9,6 +9,9 @@ import com.kakinos.webapp.repository.DoctorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -82,11 +85,24 @@ public class DoctorController {
         return modelAndView;
     }
 
-    @RequestMapping(path="/view_all_doctor",method=RequestMethod.GET)
-    public ModelAndView view_all_doctor() {
+    // @RequestMapping(path="/view_all_doctor",method=RequestMethod.GET)
+    // public ModelAndView view_all_doctor() {
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     modelAndView.setViewName("view_all_doctor");
+    //     modelAndView.addObject("doctors", doctorRepository.findAll());
+    //     return modelAndView;
+    // }
+    @RequestMapping(path = "/view_all_doctor/{page}", method = RequestMethod.GET)
+    public ModelAndView view_all_doctor(@PathVariable("page") Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         ModelAndView modelAndView = new ModelAndView();
+        Page<Doctor> doctors = doctorRepository.findAll(pageable);
         modelAndView.setViewName("view_all_doctor");
-        modelAndView.addObject("doctors", doctorRepository.findAll());
+        modelAndView.addObject("doctors", doctors.getContent());
+        modelAndView.addObject("number", doctors.getNumber()+1);
+        modelAndView.addObject("totalPages", doctors.getTotalPages());
+        modelAndView.addObject("currentPage", page);
+        
         return modelAndView;
     }
 

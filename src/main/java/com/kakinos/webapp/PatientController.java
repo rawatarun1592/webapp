@@ -118,6 +118,19 @@ public class PatientController {
     //     return modelAndView;
     // }
 
+    // @RequestMapping(path = "/view_all_patient/{page}", method = RequestMethod.GET)
+    // public ModelAndView view_all_patient(@PathVariable("page") Integer page) {
+    //     Pageable pageable = PageRequest.of(page, 10);
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     Page<Patient> patients = patientRepository.findAll(pageable);
+    //     modelAndView.setViewName("view_all_patient");
+    //     modelAndView.addObject("patients", patients.getContent());
+    //     modelAndView.addObject("currentPage", patients.getNumber());
+    //     modelAndView.addObject("totalPage", patients.getTotalPages());  
+
+    //     return modelAndView;
+    // }
+
     @RequestMapping(path = "/view_all_patient/{page}", method = RequestMethod.GET)
     public ModelAndView view_all_patient(@PathVariable("page") Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
@@ -125,9 +138,10 @@ public class PatientController {
         Page<Patient> patients = patientRepository.findAll(pageable);
         modelAndView.setViewName("view_all_patient");
         modelAndView.addObject("patients", patients.getContent());
-        modelAndView.addObject("currentPage", patients.getNumber());
-        modelAndView.addObject("totalPage", patients.getTotalPages());  
-
+        modelAndView.addObject("number", patients.getNumber()+1);
+        modelAndView.addObject("totalPages", patients.getTotalPages());
+        modelAndView.addObject("currentPage" , page);
+    
         return modelAndView;
     }
 
