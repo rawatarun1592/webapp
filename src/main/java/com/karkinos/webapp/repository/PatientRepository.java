@@ -1,10 +1,10 @@
-package com.kakinos.webapp.repository;
+package com.karkinos.webapp.repository;
 
 
 import java.util.List;
 import java.util.Optional;
 
-import com.kakinos.webapp.model.Patient;
+import com.karkinos.webapp.model.Patient;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

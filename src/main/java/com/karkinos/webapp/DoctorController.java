@@ -1,11 +1,11 @@
-package com.kakinos.webapp;
+package com.karkinos.webapp;
 
 import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.kakinos.webapp.model.Doctor;
-import com.kakinos.webapp.repository.DoctorRepository;
+import com.karkinos.webapp.model.Doctor;
+import com.karkinos.webapp.repository.DoctorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

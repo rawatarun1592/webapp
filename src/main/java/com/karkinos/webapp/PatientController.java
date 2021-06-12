@@ -1,4 +1,4 @@
-package com.kakinos.webapp;
+package com.karkinos.webapp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,14 +12,15 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import com.karkinos.webapp.model.Patient;
+import com.karkinos.webapp.repository.PatientRepository;
+
 import javax.servlet.ServletOutputStream;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-
-import com.kakinos.webapp.model.Patient;
-import com.kakinos.webapp.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

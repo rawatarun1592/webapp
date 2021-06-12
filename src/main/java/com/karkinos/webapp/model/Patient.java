@@ -1,4 +1,4 @@
-package com.kakinos.webapp.model;
+package com.karkinos.webapp.model;
 
 import java.util.List;
 
