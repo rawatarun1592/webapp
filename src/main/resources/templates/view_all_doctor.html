@@ -58,7 +58,7 @@
                                             </li>
                                              <li class="page-item" th:classappend="${number eq 1} ? 'disabled'">
                                                 <a class="page-link svg-icon"
-                                                    th:if="${currentPage >= 0}" th:href="@{${currentPage}-1 }">&laquo;</a>
+                                                    th:if="${currentPage > 0}" th:href="@{${currentPage}-1 }">&laquo;</a>
                                                     <span th:unless= "${currentPage >= 0}" >&laquo;</span>    
                                                 </a>
                                             </li>
@@ -80,13 +80,13 @@
                                         
                                             <li class="page-item" th:classappend="${number eq totalPages} ? 'disabled'">
                                                 <a class="page-link svg-icon"
-                                                th:if="${currentPage <= totalPages}" th:href="@{${currentPage}+1 }">&raquo;</a>
-                                                <span th:unless= "${currentPage <= totalPages}" >&raquo;</span>
+                                                th:if="${currentPage < totalPages-1}" th:href="@{${currentPage}+1  }">&raquo;</a>
+                                                <span th:unless= "${currentPage < totalPages}" >&raquo;</span>
                                             </li>
                                         
                                             <li class="page-item" th:classappend="${number eq totalPages} ? 'disabled'">
                                                 <a class="page-link svg-icon"
-                                                  th:if="${currentPage <= totalPages}" th:href="@{${totalPages}}">Last</a>
+                                                  th:if="${currentPage < totalPages}" th:href="@{${totalPages}-1}">Last</a>
                                                 <span th:unless= "${currentPage <= totalPages}" >Last</span>
                                             </li>
                                         </ul>
