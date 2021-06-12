@@ -156,7 +156,7 @@ public class PatientController {
     public String deletePatient(@PathVariable(name = "id") String id) {
         patientRepository.deleteById(id);
 
-        return "redirect:/view_all_patient/0"; 
+        return "redirect:/"; 
     } 
     
     @RequestMapping(path="/upload_image/{id}",method = RequestMethod.GET)
@@ -194,7 +194,7 @@ public class PatientController {
         } catch (IOException ioe) {        
             throw new IOException("Could not save image file: " + fileName, ioe);
         }
-        return "image_successful";
+        return "image_upload_message";
     }
 
     @RequestMapping(path="/docs/{id}",method = RequestMethod.GET)
@@ -251,7 +251,7 @@ public class PatientController {
         catch (IOException ioe) {        
             throw new IOException("Could not save file: " + ioe);
         }
-        return "file_successful";
+        return "file_upload_message";
     }
 
     @RequestMapping(path = "/patient_details/{id}",method=RequestMethod.GET)

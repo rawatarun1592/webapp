@@ -306,7 +306,7 @@ nav2 ul li a
 }
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 15px;
 }
 
@@ -359,5 +359,12 @@ nav2 ul li a
     text-indent: center;
     font-size: 10px;
     font-family: sans-serif;
-
+}
+.pg nav ul
+{
+    text-align: center;
+    width: 100%;
+    color: white; 
+    margin-bottom: 0px;
+    margin-top: 60px;
 }

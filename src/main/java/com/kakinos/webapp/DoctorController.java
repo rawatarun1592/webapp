@@ -136,7 +136,7 @@ public class DoctorController {
     public String deleteDoctor(@PathVariable(name = "id") String id) {
         doctorRepository.deleteById(id);
 
-        return "redirect:/view_all_doctor/0";       
+        return "redirect:/";       
     }
     
 }
