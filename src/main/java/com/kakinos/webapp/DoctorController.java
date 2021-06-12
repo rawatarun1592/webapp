@@ -29,7 +29,7 @@ public class DoctorController {
     @Autowired
     DoctorRepository doctorRepository;
 
-@RequestMapping("/new_doctor")
+    @RequestMapping("/new_doctor")
     public ModelAndView new_doctor() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("new_doctor");
@@ -39,25 +39,22 @@ public class DoctorController {
 
     @RequestMapping(path="/create_new_doctor",method=RequestMethod.POST)
     public ModelAndView create_new_doctor(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult bindingResult,
-        @RequestParam String firstName,
-        @RequestParam String lastName,
-        @RequestParam String specialization,
-        @RequestParam String phoneNumber,
-        @RequestParam String address,
-        @RequestParam String city,
-        @RequestParam Integer pincode) {
-
-            if (bindingResult.hasErrors()) {       
-        
-                System.out.println(bindingResult);
-                ModelAndView modelAndView = new ModelAndView();
-                modelAndView.setViewName("new_doctor");
-                return modelAndView;
-            }
-
+    @RequestParam String firstName,
+    @RequestParam String lastName,
+    @RequestParam String specialization,
+    @RequestParam String phoneNumber,
+    @RequestParam String address,
+    @RequestParam String city,
+    @RequestParam Integer pincode) {
+        if (bindingResult.hasErrors()) {       
+            System.out.println(bindingResult);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("new_doctor");
+            return modelAndView;
+        }
         doctorRepository.save(new Doctor(doctor.getFirstName(), doctor.getLastName(), doctor.getSpecialization(), doctor.getPhoneNumber(), doctor.getAddress(), doctor.getCity(), doctor.getPincode()));
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("submitdoctor");
+        modelAndView.setViewName("submit_doctor");
         modelAndView.addObject("firstName", firstName);
         modelAndView.addObject("lastName", lastName);
         modelAndView.addObject("specialization", specialization);
@@ -68,6 +65,7 @@ public class DoctorController {
 
         return modelAndView;
     }
+
     @RequestMapping(path="/search_doctor_form",method=RequestMethod.GET)
     public ModelAndView search_doctor_form() {
         ModelAndView modelAndView = new ModelAndView();
@@ -75,9 +73,9 @@ public class DoctorController {
 
         return modelAndView;
     }
+
     @RequestMapping(path="/search_doctor",method=RequestMethod.GET)
-    public ModelAndView search_doctor(@RequestParam String specialization, @RequestParam String city) 
-    {
+    public ModelAndView search_doctor(@RequestParam String specialization, @RequestParam String city) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search_doctor_result");
         modelAndView.addObject("doctors", doctorRepository.findBySpecializationAndCity(specialization, city));
@@ -85,13 +83,6 @@ public class DoctorController {
         return modelAndView;
     }
 
-    // @RequestMapping(path="/view_all_doctor",method=RequestMethod.GET)
-    // public ModelAndView view_all_doctor() {
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     modelAndView.setViewName("view_all_doctor");
-    //     modelAndView.addObject("doctors", doctorRepository.findAll());
-    //     return modelAndView;
-    // }
     @RequestMapping(path = "/view_all_doctor/{page}", method = RequestMethod.GET)
     public ModelAndView view_all_doctor(@PathVariable("page") Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
@@ -108,17 +99,16 @@ public class DoctorController {
 
     @RequestMapping(value = "/edit1/{id}")
     public ModelAndView showEditDoctorPage(@PathVariable(name = "id") String id) {
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("edit_doctor");
-    modelAndView.addObject("doctor", doctorRepository.findById(id));
-    modelAndView.addObject("id", id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("edit_doctor");
+        modelAndView.addObject("doctor", doctorRepository.findById(id));
+        modelAndView.addObject("id", id);
 
-    return modelAndView;
+        return modelAndView;
     }
 
     @RequestMapping(value ="/update1/{id}",method=RequestMethod.POST)
-    public ModelAndView updatePatient(@ModelAttribute("doctor") Doctor doctor, @PathVariable String id)
-        {
+    public ModelAndView updatePatient(@ModelAttribute("doctor") Doctor doctor, @PathVariable String id) {
         Optional<Doctor> doctorData = doctorRepository.findById(id);
         Doctor _doctor = doctorData.get();
         _doctor.setFirstName(doctor.getFirstName());
@@ -130,7 +120,7 @@ public class DoctorController {
         _doctor.setPincode(doctor.getPincode());
         doctorRepository.save(_doctor);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("submitdoctor");
+        modelAndView.setViewName("submit_doctor");
         modelAndView.addObject("firstName", _doctor.getFirstName());
         modelAndView.addObject("lastName", _doctor.getLastName());
         modelAndView.addObject("specialization", _doctor.getSpecialization());
@@ -144,8 +134,9 @@ public class DoctorController {
     
     @RequestMapping(value = "/delete1/{id}")
     public String deleteDoctor(@PathVariable(name = "id") String id) {
-    doctorRepository.deleteById(id);
-    return "redirect:/view_all_doctor";       
+        doctorRepository.deleteById(id);
+
+        return "redirect:/view_all_doctor/0";       
     }
     
 }
