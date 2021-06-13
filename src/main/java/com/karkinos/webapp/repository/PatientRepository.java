@@ -1,6 +1,5 @@
 package com.karkinos.webapp.repository;
 
-
 import java.util.List;
 import java.util.Optional;
 

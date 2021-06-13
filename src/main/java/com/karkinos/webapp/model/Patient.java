@@ -38,7 +38,7 @@ public class Patient {
   private String pincode;
 
   private String photos;
-  //  private String docs;
+
   private List<String> docs;
 
   public Patient() {
@@ -121,14 +121,6 @@ public class Patient {
     this.photos = photos;
   }
 
-  
-  // public String getDocs() {
-  //   return docs;
-  // }
-  // public void setDocs(String fileNames) {
-  //   this.docs = fileNames;
-  // }
-
   public List<String> getDocs() {
     return docs;
   }
@@ -140,7 +132,6 @@ public class Patient {
   @Transient
     public String getPhotosImagePath() {
         if (photos == null || id == null) return null;
-        // if (photos == null) return null;
         return "/patient-photos/" + id + "/" + photos;
     }
 
